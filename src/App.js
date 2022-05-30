@@ -12,7 +12,7 @@ import PrivateAdd from "./route/PrivateAdd";
 import PrivateRoute from "./route/PrivateRoute";
 
 function App() {
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(true);
   const [parent, setParent] = useState([]);
   const [parent2, setParent2] = useState([]);
   const [moreNum, setMoreNum] = useState(10);
@@ -53,8 +53,8 @@ function App() {
     // setParent(create)
     // parent.unshift(create)
   }, [create]);
-  console.log("크리에이트", create);
-  console.log("크리에이트2", create2);
+  // console.log("크리에이트", create);
+  // console.log("크리에이트2", create2);
   // console.log(parent);
   // console.log(scrollMove);
   return (

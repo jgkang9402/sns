@@ -29,14 +29,22 @@ const PostAll = ({
     axios.get("https://jsonplaceholder.typicode.com/comments").then((res) => {
       // console.log(res.data);
 
-      const moreInfo = res.data.slice(0, moreNum).map((item, i) => {
+      const moreInfoList = res.data.slice(0, moreNum).map((item, i) => {
         return {
           email: item.email,
           write: item.body,
         };
       });
-      // console.log(moreInfo);
-      setMoreInfo(moreInfo);
+      console.log(moreInfoList);
+      if(create.id<0){
+        console.log('===');
+        moreInfoList.unshift(create2)  
+      }
+      setMoreInfo(moreInfoList);
+      // console.log(create2);
+      // if(create2==[]){
+      //   console.log('??');
+      // }
     });
     axios.get("https://jsonplaceholder.typicode.com/photos").then((res) => {
       // console.log(res.data);
@@ -53,8 +61,17 @@ const PostAll = ({
           }/${idx}`,
         };
       });
-      // console.log(sliceList);
+      console.log(sliceList);
+      if(create.id<0){
+        console.log('+++');
+        sliceList.unshift(create)
+      }
       setPost(sliceList);
+      // console.log("크리에이트",create);
+      // console.log("크리에이트렝쓰",typeof(create));
+      // if(create==[]){
+      //   console.log('??');
+      // }
       // getMoreData(res.data);
     });
   };
@@ -75,13 +92,14 @@ const PostAll = ({
 
   useEffect(() => {
     getData();
+    // let copy = create
+    // let copy2 = create2
+
     // return setLike(Math.floor(Math.random() * 20));
-    console.log('!!!!!!!!');
+    // console.log('!!!!!!!!');
   }, [moreNum]);
   
   useEffect(() => {
-    setParent(parent.unshift(create))
-    setParent2(parent2.unshift(create2))
     // console.log("언제움직임");
     postdata();
     // setlk(post.like)
@@ -89,18 +107,24 @@ const PostAll = ({
     // console.log(lk);
   });
   // console.log(post);
-
+  
   const rememberScroll = (e) => {
     console.log(Math.floor(window.scrollY));
     // setScrollMove(window.scrollY);
     setScrollMove(Math.floor(window.scrollY));
   };
   useEffect(() => {
-    console.log("포스트올ㅇㅇㅇ");
     console.log(create);
+    // let copy = create
+    // let copy2 = create2
+    // setPost(post.unshift(copy))
+    // setMoreInfo(moreInfo.unshift(copy2))
+    // setParent(parent.unshift(create))
+    // setParent2(parent2.unshift(create2))
+    console.log("포스트올ㅇㅇㅇ");
     // setParent(create)
     // parent.unshift(create)
-  }, [create]);
+  }, []);
 
   console.log(parent);
 
