@@ -36,9 +36,9 @@ const PostAll = ({
         };
       });
       console.log(moreInfoList);
-      if(create.id<0){
-        console.log('===');
-        moreInfoList.unshift(create2)  
+      if (create.id < 0) {
+        console.log("===");
+        moreInfoList.unshift(create2);
       }
       setMoreInfo(moreInfoList);
       // console.log(create2);
@@ -62,9 +62,9 @@ const PostAll = ({
         };
       });
       console.log(sliceList);
-      if(create.id<0){
-        console.log('+++');
-        sliceList.unshift(create)
+      if (create.id < 0) {
+        console.log("+++");
+        sliceList.unshift(create);
       }
       setPost(sliceList);
       // console.log("크리에이트",create);
@@ -98,7 +98,7 @@ const PostAll = ({
     // return setLike(Math.floor(Math.random() * 20));
     // console.log('!!!!!!!!');
   }, [moreNum]);
-  
+
   useEffect(() => {
     // console.log("언제움직임");
     postdata();
@@ -107,7 +107,7 @@ const PostAll = ({
     // console.log(lk);
   });
   // console.log(post);
-  
+
   const rememberScroll = (e) => {
     console.log(Math.floor(window.scrollY));
     // setScrollMove(window.scrollY);
@@ -128,47 +128,39 @@ const PostAll = ({
 
   console.log(parent);
 
-
   return (
-    <div>
+    <main>
       <div className="ab">
-        <ol>
+        <ol className="wrap_box">
           {post.map((item, idx) => {
             return (
-              <li key={item.id}>
-                {/* <Route></Route> */}
+              <li className="odd" key={item.id}>
                 <Link to={`/post/${idx}`} onClick={rememberScroll}>
-                  {/* <Route path="/post/" element={<PostDetail post={post} />} /> */}
-                  {/* <Link to="/signup">회원가입</Link> */}
-                  {/* <Link to={`/post/${idx}`} element={<PostDetail />}> */}
-                  <div>
-                    <img src={item.pic} />
-                    <span>{moreInfo[idx].email}</span>
+                  <div className="inner">
+                    <div className="first_box">
+                      <img src={item.pic} />
+                      <span>{moreInfo[idx].email}</span>
+                    </div>
+                    <img src={item.random} />
+                    <div className="second_box">
+                      <span>{moreInfo[idx].email}</span>
+                      <span>{item.title}</span>
+                      <p>좋아요{item.like}</p>
+                    </div>
+                    <p>{moreInfo[idx].write}</p>
                   </div>
-                  {/* <img
-                    src={
-                      idx % 3 == 0
-                        ? `https://placeimg.com/300/300/nature/${idx}`
-                        : idx % 2 == 0
-                        ? `https://placeimg.com/300/300/animals/${idx}`
-                        : `https://placeimg.com/300/300/arch/${idx}`
-                    }
-                  /> */}
-                  <img src={item.random} />
-                  <div>
-                    <span>{moreInfo[idx].email}</span>
-                    <span>{item.title}</span>
-                    <p>좋아요{item.like}</p>
-                  </div>
-                  <p>{moreInfo[idx].write}</p>
                 </Link>
               </li>
             );
           })}
-          <button onClick={getMoreData}>더보기</button>
         </ol>
+          <div className="box_more">
+            <button className="more_button" onClick={getMoreData}>
+              더보기
+            </button>
+          </div>
       </div>
-    </div>
+    </main>
   );
 };
 

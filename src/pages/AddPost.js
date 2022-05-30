@@ -36,32 +36,31 @@ const AddPost = ({
   };
 
   const addPostFunc = (e) => {
-    setAddPost(
-      ...addPost,
-      {
+    setAddPost({
       heart: false,
       id: -1,
-      like: Math.floor(Math.random() * 20),
+      like: 0,
       pic: "https://placeimg.com/100/100/people/100",
       title: titleAdding.current.value,
       random: uploadImg,
     });
-    setAddPost2(
-      ...addPost2,
-      {
-      id:-1,
-      email: "xon",
-      write: "가나다라마ㅏ",
+    setAddPost2({
+      id: -1,
+      email: "email임",
+      write: writeAdding.current.value,
     });
+    // check()
+    // let copy = addPost;
+    // let copy2 = addPost2;
+    // setCreate(copy);
+    // setCreate2(copy2);
+    // navigate("/");
   };
-  useEffect(() => {
-    // console.log(addPost);
-    // console.log(addPost2);
-  }, [addPost]);
 
   const check = () => {
     // console.log(create);
     // console.log(addPost);
+    // addPostFunc();
 
     let copy = addPost;
     let copy2 = addPost2;
@@ -69,13 +68,18 @@ const AddPost = ({
     setCreate2(copy2);
     navigate("/");
   };
+  useEffect(() => {
+    console.log('이떄실행');
+    if(addPost.hasOwnProperty("random")){
+      check()
+    }
+  }, [addPost]);
 
   return (
     <div>
       <div>
         <h2>로그인된 이메일</h2>
-        <input onChange={picUpdate} ref={picAdding} id="file" type="file" />
-        <label htmlFor="file">파일업로드</label>
+        <input onChange={picUpdate} ref={picAdding} id="file" type="file"  />
         <input
           ref={titleAdding}
           className="ddd"
@@ -87,9 +91,6 @@ const AddPost = ({
           <button onClick={addPostFunc}>저장</button>
         </div>
       </div>
-      <h2>
-        <button onClick={check}>뭐있나</button>
-      </h2>
     </div>
   );
 };

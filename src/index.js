@@ -7,6 +7,18 @@ import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  /* 
+    기능
+    1. api따오기
+    2. private기능
+    3. 포스트추가하기
+    4. 포스트제거하기
+    5. 포스트 수정하기
+    6. 마크업
+    7. 로그인기능
+    8. 디테일페이지
+    9. 댓글기능
+  */
   <BrowserRouter>
     <App />
   </BrowserRouter>

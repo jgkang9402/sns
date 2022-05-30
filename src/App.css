@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
+
+
 .App {
   text-align: center;
 }
@@ -27,6 +30,8 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  background: linear-gradient(45deg, #fbf4f4, aqua);
+
 }
 
 .ab li {
@@ -39,7 +44,7 @@
   right: 100px;
   bottom: 100px;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: #fff;
   font-size: 40px;
 }
 
@@ -56,5 +61,93 @@
 }
 
 .form-control:valid {
-  background-color: white !important;
+  background-color: #fff !important;
+}
+
+
+
+
+main {
+  margin-left: 0;
+  background: linear-gradient(90deg, aqua, #fbf4f4);
+  position: relative;
+}
+
+.wrap_box{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  padding-left: 0;
+}
+
+.odd {
+  /* width: 20%; */
+  /* float: left; */
+
+  overflow: hidden;
+  padding: 12px;
+}
+
+.odd .inner {
+  width: 100%;
+  background: #fff;
+  /* padding: 14px; */
+}
+
+.odd .inner img {
+  width: 100%;
+}
+
+.odd .inner .first_box {
+  font: bold 11px/1 "orbitron";
+  /* letter-spacing: 1px; */
+  color: #444;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.odd .inner .second_box {
+  font: 10px/1.2 "arial";
+  color: #777;
+  margin-bottom: 15px;
+}
+.odd .inner p {
+  height: 100px;
+}
+
+/* @media screen and (max-width: 1199px) {
+} */
+
+/* @media screen and (max-width: 899px) {
+} */
+
+@media screen and (max-width: 799px) {
+  .wrap_box{
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+}
+
+@media screen and (max-width: 699px) {
+  .wrap_box{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media screen and (max-width: 615px) {
+  .wrap_box{
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.box_more {
+  position: relative;
+  height: 100px;
+  text-align: center;
+}
+
+.more_button {
+  width: 100px;
+  height: 100px;
 }
