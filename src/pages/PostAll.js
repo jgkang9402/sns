@@ -2,14 +2,27 @@ import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Route, Routes, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PostDetail from "./PostDetail";
 
-const PostAll = ({ setParent, moreNum, setMoreNum }) => {
+const PostAll = ({
+  parent,
+  setParent,
+  parent2,
+  setParent2,
+  moreNum,
+  setMoreNum,
+  setScrollMove,
+  create,
+  setCreate,
+  create2,
+  setCreate2,
+}) => {
   const [post, setPost] = useState([]);
   const [moreInfo, setMoreInfo] = useState([]);
   // const [moreNum, setMoreNum] = useState(10);
-  const [lk, setlk] = useState([]);
+  // const [scroll,setScrollMove] = useState(0)
+
   const randompic = ["nature", "animals", "arch"];
 
   const getData = () => {
@@ -38,7 +51,6 @@ const PostAll = ({ setParent, moreNum, setMoreNum }) => {
           random: `https://placeimg.com/300/300/${
             randompic[idx % 3 == 0 ? 0 : idx % 2 == 0 ? 1 : 2]
           }/${idx}`,
-          // like2: setlk(post[idx].like)
         };
       });
       // console.log(sliceList);
@@ -49,20 +61,49 @@ const PostAll = ({ setParent, moreNum, setMoreNum }) => {
 
   const getMoreData = () => {
     setMoreNum(moreNum + 10);
+    // console.log(window.scrollY);
+    window.scrollTo({
+      top: window.scrollY,
+      behavior: "auto",
+    });
+  };
+
+  const postdata = () => {
+    setParent(post);
+    setParent2(moreInfo);
   };
 
   useEffect(() => {
     getData();
     // return setLike(Math.floor(Math.random() * 20));
+    console.log('!!!!!!!!');
   }, [moreNum]);
-
+  
   useEffect(() => {
+    setParent(parent.unshift(create))
+    setParent2(parent2.unshift(create2))
+    // console.log("언제움직임");
+    postdata();
     // setlk(post.like)
     // console.log(post.like);
     // console.log(lk);
-  }, [post.like]);
+  });
   // console.log(post);
-  setParent(post);
+
+  const rememberScroll = (e) => {
+    console.log(Math.floor(window.scrollY));
+    // setScrollMove(window.scrollY);
+    setScrollMove(Math.floor(window.scrollY));
+  };
+  useEffect(() => {
+    console.log("포스트올ㅇㅇㅇ");
+    console.log(create);
+    // setParent(create)
+    // parent.unshift(create)
+  }, [create]);
+
+  console.log(parent);
+
 
   return (
     <div>
@@ -72,7 +113,7 @@ const PostAll = ({ setParent, moreNum, setMoreNum }) => {
             return (
               <li key={item.id}>
                 {/* <Route></Route> */}
-                <Link to={`/post/${idx}`}>
+                <Link to={`/post/${idx}`} onClick={rememberScroll}>
                   {/* <Route path="/post/" element={<PostDetail post={post} />} /> */}
                   {/* <Link to="/signup">회원가입</Link> */}
                   {/* <Link to={`/post/${idx}`} element={<PostDetail />}> */}
@@ -89,11 +130,11 @@ const PostAll = ({ setParent, moreNum, setMoreNum }) => {
                         : `https://placeimg.com/300/300/arch/${idx}`
                     }
                   /> */}
-                  <img src={item.random}/>
+                  <img src={item.random} />
                   <div>
                     <span>{moreInfo[idx].email}</span>
                     <span>{item.title}</span>
-                    <p>{lk}</p>
+                    <p>좋아요{item.like}</p>
                   </div>
                   <p>{moreInfo[idx].write}</p>
                 </Link>

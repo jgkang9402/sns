@@ -42,3 +42,19 @@
   background-color: #ffffff;
   font-size: 40px;
 }
+
+
+.login-form {
+  width: 40em;
+}
+.login-area {
+  display: flex;
+  justify-content: center;
+}
+.login-button {
+  cursor: pointer;
+}
+
+.form-control:valid {
+  background-color: white !important;
+}
