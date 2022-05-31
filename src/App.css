@@ -35,7 +35,7 @@
 }
 
 .ab li {
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
 }
 
 .tothetop {
@@ -49,20 +49,9 @@
 }
 
 
-.login-form {
-  width: 40em;
-}
-.login-area {
-  display: flex;
-  justify-content: center;
-}
-.login-button {
-  cursor: pointer;
-}
+/* 로그인 */
 
-.form-control:valid {
-  background-color: #fff !important;
-}
+/* 로그인 */
 
 
 
@@ -75,7 +64,7 @@ main {
 
 .wrap_box{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   margin: 0;
   padding-left: 0;
 }
@@ -92,9 +81,11 @@ main {
   width: 100%;
   background: #fff;
   /* padding: 14px; */
+  border-radius: 25px;
+  height: 450px;
 }
 
-.odd .inner img {
+.odd .inner .post_img {
   width: 100%;
 }
 
@@ -104,6 +95,10 @@ main {
   color: #444;
   margin-top: 15px;
   margin-bottom: 5px;
+}
+.first_box img {
+  width: 50%;
+  border-radius: 50%;
 }
 
 .odd .inner .second_box {
@@ -118,8 +113,12 @@ main {
 /* @media screen and (max-width: 1199px) {
 } */
 
-/* @media screen and (max-width: 899px) {
-} */
+@media screen and (max-width: 899px) {
+  .wrap_box{
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+}
 
 @media screen and (max-width: 799px) {
   .wrap_box{

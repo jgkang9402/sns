@@ -12,7 +12,7 @@ import PrivateAdd from "./route/PrivateAdd";
 import PrivateRoute from "./route/PrivateRoute";
 
 function App() {
-  const [login, setLogin] = useState(true);
+  const [login, setLogin] = useState(false);
   const [parent, setParent] = useState([]);
   const [parent2, setParent2] = useState([]);
   const [moreNum, setMoreNum] = useState(10);
@@ -48,7 +48,7 @@ function App() {
   }, [parent]);
 
   useEffect(() => {
-    console.log("ㅇㅇㅇ");
+    // console.log("ㅇㅇㅇ");
     // setParent(parent.unshift(create))
     // setParent(create)
     // parent.unshift(create)
@@ -57,6 +57,7 @@ function App() {
   // console.log("크리에이트2", create2);
   // console.log(parent);
   // console.log(scrollMove);
+  // console.log(create);
   return (
     <div className="App">
       <Navbar login={login} setLogin={setLogin} />

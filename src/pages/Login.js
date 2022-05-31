@@ -1,42 +1,68 @@
 import React from "react";
+import { useRef } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const Login = ({ setLogin }) => {
+  const inputId =useRef()
+  const inputPw =useRef()
   const navigate = useNavigate();
   const loginUser = (e) => {
-    e.preventDefault();
-    console.log("login user function issue");
+    if(inputId.current.value==""||inputPw.current.value==""){
+      e.preventDefault();
+      console.log(123);
+      return
+    }
+
+
+    var regExp =
+    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    if(inputId.current.value.match(regExp)==null || !inputId.current.value.includes(".")){
+      e.preventDefault();
+      console.log('틀림');
+      return
+    }
+
     setLogin(true);
-    navigate('/');
+    navigate("/");
   };
   return (
     <div>
-      <Container>
-        <Form onSubmit={(event) => loginUser(event)}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
-          <Button variant="danger" type="submit">
-            로그인
-          </Button>
-          {/* 
-            Form태그안에있는 버튼의 타입이 submit이면 onclick으로 이벤트를 주면안됨,
-            Form태그에 onSubmit={}을 줘야함
-          */}
-        </Form>
-      </Container>
+      <div className="form-wrapper" id="wrapper-login">
+        {/* <img src="https://i.imgur.com/iqskGqe.jpg" alt="bg1" /> */}
+        <form className="form-login">
+          <input
+            ref={inputId}
+            type="text"
+            placeholder="Username"
+            className="input-username"
+            id="input-username"
+            // autocomplete="off"
+          />
+          <p className="error_txt">???</p>
+          <div className="pw-box">
+            <input
+              ref={inputPw}
+              type="password"
+              placeholder="Password"
+              className="input-password"
+              id="input-password"
+              // autocomplete="off"
+            />
+          </div>
+          <p className="error_txt">??</p>
+          <div className="custum-checkbox">
+            <input type="checkbox" id="id_save" />
+            <label htmlFor="id_save">아이디 저장</label>
+          </div>
+          <button onClick={loginUser} type="button" className="btn-login">
+            LOGIN
+          </button>
+        </form>
+        <p>
+          No account? <a href="#wrapper-signup">Sign up</a>
+        </p>
+      </div>
     </div>
   );
 };

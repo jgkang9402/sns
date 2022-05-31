@@ -35,10 +35,15 @@ const PostAll = ({
           write: item.body,
         };
       });
-      console.log(moreInfoList);
-      if (create.id < 0) {
-        console.log("===");
-        moreInfoList.unshift(create2);
+      // console.log(moreInfoList);
+      if (create.length > 0) {
+        // console.log(create2);
+        // console.log("===");
+        // moreInfoList.concat(create2);
+        // let newArr = moreInfoList.concat(create2);
+        let newArr = create2.concat(moreInfoList);
+        setMoreInfo(newArr);
+        return
       }
       setMoreInfo(moreInfoList);
       // console.log(create2);
@@ -61,12 +66,18 @@ const PostAll = ({
           }/${idx}`,
         };
       });
-      console.log(sliceList);
-      if (create.id < 0) {
-        console.log("+++");
-        sliceList.unshift(create);
+      // console.log(sliceList);
+      if (create.length > 0) {
+        // console.log(create);
+        // console.log("+++");
+        // sliceList.concat(create);
+        // let newArr = sliceList.concat(create);
+        let newArr = create.concat(sliceList);
+        setPost(newArr);
+        return
       }
       setPost(sliceList);
+      // console.log('zzzzzzzzz');
       // console.log("크리에이트",create);
       // console.log("크리에이트렝쓰",typeof(create));
       // if(create==[]){
@@ -109,24 +120,24 @@ const PostAll = ({
   // console.log(post);
 
   const rememberScroll = (e) => {
-    console.log(Math.floor(window.scrollY));
+    // console.log(Math.floor(window.scrollY));
     // setScrollMove(window.scrollY);
     setScrollMove(Math.floor(window.scrollY));
   };
   useEffect(() => {
-    console.log(create);
+    // console.log(create);
     // let copy = create
     // let copy2 = create2
     // setPost(post.unshift(copy))
     // setMoreInfo(moreInfo.unshift(copy2))
     // setParent(parent.unshift(create))
     // setParent2(parent2.unshift(create2))
-    console.log("포스트올ㅇㅇㅇ");
+    // console.log("포스트올ㅇㅇㅇ");
     // setParent(create)
     // parent.unshift(create)
   }, []);
 
-  console.log(parent);
+  // console.log(parent);
 
   return (
     <main>
@@ -141,7 +152,7 @@ const PostAll = ({
                       <img src={item.pic} />
                       <span>{moreInfo[idx].email}</span>
                     </div>
-                    <img src={item.random} />
+                    <img className="post_img" src={item.random} />
                     <div className="second_box">
                       <span>{moreInfo[idx].email}</span>
                       <span>{item.title}</span>
