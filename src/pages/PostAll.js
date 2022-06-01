@@ -154,7 +154,7 @@ const PostAll = ({
                     </div>
                     <img className="post_img" src={item.random} />
                     <div className="second_box">
-                      <span>{moreInfo[idx].email}</span>
+                      <span>{moreInfo[idx].email}</span><br />
                       <span>{item.title}</span>
                       <p>좋아요{item.like}</p>
                     </div>

@@ -13,6 +13,7 @@ const AddPost = ({
   setCreate,
   create2,
   setCreate2,
+  userId,
 }) => {
   const navigate = useNavigate();
   const [addPost, setAddPost] = useState([]);
@@ -52,7 +53,7 @@ const AddPost = ({
       // ...copy2,
       {
         id: -Math.floor(Math.random() * 100),
-        email: "email임",
+        email: userId,
         write: writeAdding.current.value,
       },
     ]);
@@ -105,7 +106,7 @@ const AddPost = ({
   return (
     <div>
       <div>
-        <h2>로그인된 이메일</h2>
+        <h2>유저 이메일: {userId}</h2>
         <input onChange={picUpdate} ref={picAdding} id="file" type="file" />
         <input
           ref={titleAdding}

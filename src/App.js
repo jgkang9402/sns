@@ -13,6 +13,7 @@ import PrivateRoute from "./route/PrivateRoute";
 
 function App() {
   const [login, setLogin] = useState(false);
+  const [userId, setUserId] = useState("");
   const [parent, setParent] = useState([]);
   const [parent2, setParent2] = useState([]);
   const [moreNum, setMoreNum] = useState(10);
@@ -97,7 +98,7 @@ function App() {
         /> */}
         <Route
           path="/login"
-          element={<Login login={login} setLogin={setLogin} />}
+          element={<Login login={login} setLogin={setLogin} userId={userId} setUserId={setUserId} />}
         />
         <Route
           path="/addpost"
@@ -113,6 +114,7 @@ function App() {
               setCreate={setCreate}
               create2={create2}
               setCreate2={setCreate2}
+              userId={userId}
             />
           }
         />

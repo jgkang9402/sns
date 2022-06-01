@@ -30,7 +30,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background: linear-gradient(45deg, #fbf4f4, aqua);
+  background: linear-gradient(180deg, #fbf4f4, aqua);
 
 }
 
@@ -58,7 +58,7 @@
 
 main {
   margin-left: 0;
-  background: linear-gradient(90deg, aqua, #fbf4f4);
+  background: linear-gradient(180deg, aqua, #fbf4f4);
   position: relative;
 }
 
@@ -83,10 +83,14 @@ main {
   /* padding: 14px; */
   border-radius: 25px;
   height: 450px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
 }
 
 .odd .inner .post_img {
   width: 100%;
+  /* max-width: 300px; */
+  min-height: 150px;
 }
 
 .odd .inner .first_box {
@@ -107,7 +111,7 @@ main {
   margin-bottom: 15px;
 }
 .odd .inner p {
-  height: 100px;
+  /* height: 100px; */
 }
 
 /* @media screen and (max-width: 1199px) {
@@ -150,3 +154,22 @@ main {
   width: 100px;
   height: 100px;
 }
+
+
+/* 디테일 */
+.go-back {
+  cursor: pointer;
+  font-size: 40px;
+  position: absolute;
+  left: 5px;
+}
+
+
+
+
+
+
+
+
+
+

@@ -3,25 +3,28 @@ import { useRef } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ setLogin }) => {
-  const inputId =useRef()
-  const inputPw =useRef()
+const Login = ({ setLogin, userId, setUserId }) => {
+  const inputId = useRef();
+  const inputPw = useRef();
   const navigate = useNavigate();
   const loginUser = (e) => {
-    if(inputId.current.value==""||inputPw.current.value==""){
+    if (inputId.current.value == "" || inputPw.current.value == "") {
       e.preventDefault();
       console.log(123);
-      return
+      return;
     }
-
 
     var regExp =
-    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    if(inputId.current.value.match(regExp)==null || !inputId.current.value.includes(".")){
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    if (
+      inputId.current.value.match(regExp) == null ||
+      !inputId.current.value.includes(".")
+    ) {
       e.preventDefault();
-      console.log('틀림');
-      return
+      console.log("틀림");
+      return;
     }
+    setUserId(inputId.current.value)
 
     setLogin(true);
     navigate("/");

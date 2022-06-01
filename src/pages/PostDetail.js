@@ -9,7 +9,7 @@ const PostDetail = ({ parent, parent2 }) => {
   };
   return (
     <div>
-      <button onClick={goBack}>뒤로가기</button>
+      <span className="go-back" onClick={goBack}>🔙</span>
       <ul>
         <li key={parent.id}>
           <div>
@@ -34,7 +34,6 @@ const PostDetail = ({ parent, parent2 }) => {
             </div>
             <p>{parent2[id].write}</p>
 
-            <h1>현재 파라미터는 {id}</h1>
             {/* <p>{lk}</p> */}
           </div>
           {/* <p>{moreInfo[idx].write}</p> */}
