@@ -34,9 +34,6 @@
 
 }
 
-.ab li {
-  /* border: 1px solid #000; */
-}
 
 .tothetop {
   cursor: pointer;
@@ -50,8 +47,9 @@
 
 
 /* 로그인 */
-
-/* 로그인 */
+.error_txt{
+  color: red;
+}
 
 
 

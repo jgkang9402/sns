@@ -20,14 +20,6 @@ const AddPost = ({
   const [addPost2, setAddPost2] = useState([]);
   const [uploadImg, setUploadImg] = useState("");
   let [count, setCount] = useState(-1);
-  // let [copy1, setCopy1] = useState([]);
-  // let [copy2, setCopy2] = useState([]);
-  // console.log(copy1);
-
-  // console.log(addPost);
-  // console.log(addPost2);
-
-  // const {title,random} = addPost
   const titleAdding = useRef();
   const picAdding = useRef();
   const writeAdding = useRef();
@@ -47,6 +39,7 @@ const AddPost = ({
         pic: "https://placeimg.com/100/100/people/100",
         title: titleAdding.current.value,
         random: uploadImg,
+        deleteAbailable: true,
       },
     ]);
     setAddPost2([
@@ -57,50 +50,21 @@ const AddPost = ({
         write: writeAdding.current.value,
       },
     ]);
-    
-    // console.log(addPost);
-    // console.log(addPost2);
-    // check()
-    // let copy = addPost;
-    // let copy2 = addPost2;
-    // setCreate(copy);
-    // setCreate2(copy2);
-    // navigate("/");
   };
-  
+
   const check = () => {
-    // console.log(create);
-    // console.log(addPost);
-    // addPostFunc();
-    // console.log(addPost);
-    // console.log(addPost2);
-    // setCopy1(addPost);
-    // if (copy1 != []) {
-    //   setCopy1(addPost.concat(copy1));
-    //   setCopy2(addPost2.concat(copy2));
-    // }
-    
     let arr = addPost;
     let arr2 = addPost2;
-    // setCreate(arr);
-    // setCreate2(arr2);
     setCreate(arr.concat(create));
     setCreate2(arr2.concat(create2));
 
     navigate("/");
   };
   useEffect(() => {
-    // console.log("이떄실행");
     // if (addPost.hasOwnProperty("random")) {
-      // setCount(count-1);
-      if (addPost.length !== 0) {
-        // console.log(copy1);
-
+    if (addPost.length !== 0) {
       check();
-      // setAddPost([]);
-      // setAddPost2([]);
     }
-    // console.log(copy1);
   }, [addPost]);
 
   return (

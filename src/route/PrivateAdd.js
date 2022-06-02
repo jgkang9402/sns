@@ -15,7 +15,7 @@ const PrivateAdd = ({
   setCreate2,
   userId,
 }) => {
-  return login == true ? (
+  return login === true ? (
     <AddPost
       userId={userId}
       create={create}

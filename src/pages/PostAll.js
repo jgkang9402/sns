@@ -1,9 +1,9 @@
 import axios from "axios";
 import React from "react";
+import { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import PostDetail from "./PostDetail";
 
 const PostAll = ({
   parent,
@@ -20,8 +20,7 @@ const PostAll = ({
 }) => {
   const [post, setPost] = useState([]);
   const [moreInfo, setMoreInfo] = useState([]);
-  // const [moreNum, setMoreNum] = useState(10);
-  // const [scroll,setScrollMove] = useState(0)
+  const selectPost = useRef();
 
   const randompic = ["nature", "animals", "arch"];
 
@@ -37,19 +36,11 @@ const PostAll = ({
       });
       // console.log(moreInfoList);
       if (create.length > 0) {
-        // console.log(create2);
-        // console.log("===");
-        // moreInfoList.concat(create2);
-        // let newArr = moreInfoList.concat(create2);
         let newArr = create2.concat(moreInfoList);
         setMoreInfo(newArr);
-        return
+        return;
       }
       setMoreInfo(moreInfoList);
-      // console.log(create2);
-      // if(create2==[]){
-      //   console.log('??');
-      // }
     });
     axios.get("https://jsonplaceholder.typicode.com/photos").then((res) => {
       // console.log(res.data);
@@ -57,16 +48,16 @@ const PostAll = ({
         return {
           id: item.id,
           title: item.title,
-          photo: item.thumbnailUrl,
           heart: false,
           like: Math.floor(Math.random() * 20),
           pic: `https://placeimg.com/100/100/people/${idx}`,
           random: `https://placeimg.com/300/300/${
-            randompic[idx % 3 == 0 ? 0 : idx % 2 == 0 ? 1 : 2]
+            randompic[idx % 3 === 0 ? 0 : idx % 2 === 0 ? 1 : 2]
           }/${idx}`,
+          deleteAbailable: false,
         };
       });
-      // console.log(sliceList);
+      console.log(sliceList);
       if (create.length > 0) {
         // console.log(create);
         // console.log("+++");
@@ -74,22 +65,14 @@ const PostAll = ({
         // let newArr = sliceList.concat(create);
         let newArr = create.concat(sliceList);
         setPost(newArr);
-        return
+        return;
       }
       setPost(sliceList);
-      // console.log('zzzzzzzzz');
-      // console.log("크리에이트",create);
-      // console.log("크리에이트렝쓰",typeof(create));
-      // if(create==[]){
-      //   console.log('??');
-      // }
-      // getMoreData(res.data);
     });
   };
 
   const getMoreData = () => {
     setMoreNum(moreNum + 10);
-    // console.log(window.scrollY);
     window.scrollTo({
       top: window.scrollY,
       behavior: "auto",
@@ -101,43 +84,53 @@ const PostAll = ({
     setParent2(moreInfo);
   };
 
+  const rememberScroll = (e) => {
+    setScrollMove(Math.floor(window.scrollY));
+  };
+
+  const removePost = (e, idx) => {
+    // console.log(selectPost.e.current)
+    console.log(e.target.className);
+    idx = e.target.className;
+    console.log(selectPost.current);
+    // console.log(selectPost.key);
+    // setPost(post.splice(e.target.className,1))
+    // setMoreInfo(moreInfo.splice(e.target.className,1))
+    // setCreate(create.splice(e.target.className,1))
+    // setCreate2(create2.splice(e.target.className,1))
+    console.log(idx);
+    console.log(parent[idx]);
+    if (parent[idx].deleteAbailable === true) {
+      setCreate(create.splice(idx, 1));
+      setCreate2(create2.splice(idx, 1));
+      setParent(parent.splice(idx, 1));
+      setParent2(parent2.splice(idx, 1));
+      return;
+    } else {
+      alert("타인의 게시물은 지울수없습니다");
+    }
+    // console.log(create);
+  };
+
   useEffect(() => {
     getData();
-    // let copy = create
-    // let copy2 = create2
-
-    // return setLike(Math.floor(Math.random() * 20));
-    // console.log('!!!!!!!!');
   }, [moreNum]);
 
   useEffect(() => {
-    // console.log("언제움직임");
     postdata();
-    // setlk(post.like)
-    // console.log(post.like);
-    // console.log(lk);
   });
-  // console.log(post);
 
-  const rememberScroll = (e) => {
-    // console.log(Math.floor(window.scrollY));
-    // setScrollMove(window.scrollY);
-    setScrollMove(Math.floor(window.scrollY));
-  };
-  useEffect(() => {
-    // console.log(create);
-    // let copy = create
-    // let copy2 = create2
-    // setPost(post.unshift(copy))
-    // setMoreInfo(moreInfo.unshift(copy2))
-    // setParent(parent.unshift(create))
-    // setParent2(parent2.unshift(create2))
-    // console.log("포스트올ㅇㅇㅇ");
-    // setParent(create)
-    // parent.unshift(create)
-  }, []);
-
-  // console.log(parent);
+  // useEffect(() => {
+  //   // setParent(post)
+  //   // setParent2(moreInfo)
+  //   setPost(post)
+  //   setMoreInfo(moreInfo)
+  //   console.log('여기도');
+  //   // setCreate(create,...post)
+  //   // setCreate2(create2, ...moreInfo)
+  //   setCreate(create)
+  //   setCreate2(create2)
+  // }, [create]);
 
   return (
     <main>
@@ -145,31 +138,44 @@ const PostAll = ({
         <ol className="wrap_box">
           {post.map((item, idx) => {
             return (
-              <li className="odd" key={item.id}>
-                <Link to={`/post/${idx}`} onClick={rememberScroll}>
-                  <div className="inner">
-                    <div className="first_box">
-                      <img src={item.pic} />
-                      <span>{moreInfo[idx].email}</span>
-                    </div>
+              <li className="odd" key={item.id} ref={selectPost}>
+                <div className="inner">
+                  <div className="first_box">
+                    <span
+                      className={idx}
+                      style={{
+                        display: "inline-block",
+                        marginBottom: "20px",
+                        cursor: "pointer",
+                      }}
+                      onClick={removePost}
+                    >
+                      ❌
+                    </span>
+                    <br />
+                    <img src={item.pic} />
+                    <span>{moreInfo[idx].email}</span>
+                  </div>
+                  <Link to={`/post/${idx}`} onClick={rememberScroll}>
                     <img className="post_img" src={item.random} />
                     <div className="second_box">
-                      <span>{moreInfo[idx].email}</span><br />
+                      <span>{moreInfo[idx].email}</span>
+                      <br />
                       <span>{item.title}</span>
                       <p>좋아요{item.like}</p>
                     </div>
                     <p>{moreInfo[idx].write}</p>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               </li>
             );
           })}
         </ol>
-          <div className="box_more">
-            <button className="more_button" onClick={getMoreData}>
-              더보기
-            </button>
-          </div>
+        <div className="box_more">
+          <button className="more_button" onClick={getMoreData}>
+            더보기
+          </button>
+        </div>
       </div>
     </main>
   );

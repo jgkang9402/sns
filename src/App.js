@@ -4,15 +4,13 @@ import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import AddPost from "./pages/AddPost";
 import Login from "./pages/Login";
 import PostAll from "./pages/PostAll";
-import PostDetail from "./pages/PostDetail";
 import PrivateAdd from "./route/PrivateAdd";
 import PrivateRoute from "./route/PrivateRoute";
 
 function App() {
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(true);
   const [userId, setUserId] = useState("");
   const [parent, setParent] = useState([]);
   const [parent2, setParent2] = useState([]);
@@ -36,7 +34,7 @@ function App() {
   };
   useEffect(() => {
     // console.log(morescr.current);
-    if (morescr.current == parent.length) {
+    if (morescr.current === parent.length) {
       morescr.current = parent.length;
       scrollReturn();
     } else if (parent.length > morescr.current) {
@@ -47,18 +45,10 @@ function App() {
       scrollReturn();
     }
   }, [parent]);
+  console.log(parent);
+  useEffect(()=>{
+  })
 
-  useEffect(() => {
-    // console.log("ㅇㅇㅇ");
-    // setParent(parent.unshift(create))
-    // setParent(create)
-    // parent.unshift(create)
-  }, [create]);
-  // console.log("크리에이트", create);
-  // console.log("크리에이트2", create2);
-  // console.log(parent);
-  // console.log(scrollMove);
-  // console.log(create);
   return (
     <div className="App">
       <Navbar login={login} setLogin={setLogin} />
@@ -98,7 +88,14 @@ function App() {
         /> */}
         <Route
           path="/login"
-          element={<Login login={login} setLogin={setLogin} userId={userId} setUserId={setUserId} />}
+          element={
+            <Login
+              login={login}
+              setLogin={setLogin}
+              userId={userId}
+              setUserId={setUserId}
+            />
+          }
         />
         <Route
           path="/addpost"
