@@ -75,7 +75,7 @@ main {
   padding: 12px;
 }
 
-.odd .inner {
+.inner {
   width: 100%;
   background: #fff;
   /* padding: 14px; */
@@ -85,13 +85,13 @@ main {
 
 }
 
-.odd .inner .post_img {
+.inner .post_img {
   width: 100%;
   /* max-width: 300px; */
   min-height: 150px;
 }
 
-.odd .inner .first_box {
+.inner .first_box {
   font: bold 11px/1 "orbitron";
   /* letter-spacing: 1px; */
   color: #444;
@@ -103,17 +103,17 @@ main {
   border-radius: 50%;
 }
 
-.odd .inner .second_box {
+.inner .second_box {
   font: 10px/1.2 "arial";
   color: #777;
   margin-bottom: 15px;
 }
-.odd .inner p {
+.inner p {
   /* height: 100px; */
 }
 
-/* @media screen and (max-width: 1199px) {
-} */
+@media screen and (max-width: 1199px) {
+}
 
 @media screen and (max-width: 899px) {
   .wrap_box{
@@ -153,6 +153,10 @@ main {
   height: 100px;
 }
 
+.like_btn {
+  cursor: pointer;
+}
+
 
 /* 디테일 */
 .go-back {
@@ -161,10 +165,51 @@ main {
   position: absolute;
   left: 5px;
 }
+.detail_wrap_box{
+  position: relative;
+  border: 1px solid #333;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.detail_first_box {
+  /* font: 10px/1.2 "arial"; */
+  font: bold 11px/1 "orbitron";
+
+  margin-bottom: 20px;
+  border-bottom: 1px solid #333;
+}
+.detail_first_box img{
+  border-radius: 50%;
+}
 
 
 
+/* 모달 */
+.modal_box{
+  background-color: rgba(255, 255, 255, .8);
+  width: 30vw;
+  height: 20vh;
+  /* display: none; */
+  position: fixed;
+  left: 50%;
+  top: -100%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  
+}
+.modalChange {
+  transition: .5s;
+  top: 50%;
+  opacity: 1;
+  color: red;
+}
+.closebtn{
+  width: 100%;
+  height: 100%;
 
+}
 
 
 

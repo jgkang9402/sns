@@ -7,28 +7,43 @@ const PostDetail = ({ parent, parent2 }) => {
   const goBack = () => {
     navigate(-1);
   };
+  const likeToggle = (e)=>{
+    // parent.id.like
+    // console.log(e.target.innerText);
+    console.log(parent[id].heart);
+    if(parent[id].heart){
+      e.target.innerText = "Like 🤍"
+      parent[id].heart=false
+      
+      console.log(parent[id].like);
+    }else{
+      e.target.innerText ="Like ❤"
+      parent[id].heart=true
+      console.log(parent[id].like);
+      
+    }
+    // parent[id].heart==false?parent[id].like="Like 🤍":
+  }
   return (
     <div>
-      <span className="go-back" onClick={goBack}>
+      <div className="detail_wrap_box">
+        <span className="go-back" onClick={goBack}>
         🔙
       </span>
-      <ul>
-        <li key={parent.id}>
+        <div className="detail_first_box">
+          <img src={parent[id].pic} />
+          <span>{parent2[id].email}</span>
+        </div>
+        <img src={parent[id].random} />
+        <div>
           <div>
-            <img src={parent[id].pic} />
-            <span>{parent2[id].email}</span>
+            <span>Writer : {parent2[id].email}</span><br />
+            <span>Title : {parent[id].title}</span>
+            <p className="like_btn" onClick={likeToggle}>{parent[id].like}</p>
           </div>
-          <img src={parent[id].random} />
-          <div>
-            <div>
-              <span>{parent2[id].email}</span>
-              <span>{parent[id].title}</span>
-              <p>좋아요{parent[id].like}</p>
-            </div>
-            <p>{parent2[id].write}</p>
-          </div>
-        </li>
-      </ul>
+          <p>{parent2[id].write}</p>
+        </div>
+      </div>
     </div>
   );
 };

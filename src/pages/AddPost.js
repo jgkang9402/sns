@@ -33,12 +33,15 @@ const AddPost = ({
     setAddPost([
       // ...copy1,
       {
-        heart: false,
         id: -Math.floor(Math.random() * 100),
-        like: 0,
+        heart: false,
+        like: "Like 🤍",
         pic: "https://placeimg.com/100/100/people/100",
         title: titleAdding.current.value,
-        random: uploadImg,
+        random:
+          uploadImg == ""
+            ? "https://via.placeholder.com/150/eaf2e1"
+            : uploadImg,
         deleteAbailable: true,
       },
     ]);
@@ -71,14 +74,16 @@ const AddPost = ({
     <div>
       <div>
         <h2>유저 이메일: {userId}</h2>
-        <input onChange={picUpdate} ref={picAdding} id="file" type="file" />
         <input
           ref={titleAdding}
           className="ddd"
           type="text"
           placeholder="글제목입력(title)"
         />
+        <br />
         <textarea ref={writeAdding} type="text" placeholder="본문입력(wirte)" />
+        <br />
+        <input onChange={picUpdate} ref={picAdding} id="file" type="file" />
         <div>
           <button onClick={addPostFunc}>저장</button>
         </div>

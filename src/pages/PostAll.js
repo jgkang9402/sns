@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Modal from "../components/Modal";
 
 const PostAll = ({
   parent,
@@ -21,6 +22,9 @@ const PostAll = ({
   const [post, setPost] = useState([]);
   const [moreInfo, setMoreInfo] = useState([]);
   const selectPost = useRef();
+  // let [lk, setlk] = useState("Like 🤍");
+  const [likeToggle, setLikeToggle] = useState(false);
+  const [modalToggle, setmodalToggle] = useState(false);
 
   const randompic = ["nature", "animals", "arch"];
 
@@ -49,7 +53,10 @@ const PostAll = ({
           id: item.id,
           title: item.title,
           heart: false,
-          like: Math.floor(Math.random() * 20),
+          like: item.like == false ? "Like ❤" : "Like 🤍",
+          // like: likeToggle,
+          // like: "Like 🤍",
+          // like: Math.floor(Math.random() * 20),
           pic: `https://placeimg.com/100/100/people/${idx}`,
           random: `https://placeimg.com/300/300/${
             randompic[idx % 3 === 0 ? 0 : idx % 2 === 0 ? 1 : 2]
@@ -57,7 +64,7 @@ const PostAll = ({
           deleteAbailable: false,
         };
       });
-      console.log(sliceList);
+      // console.log(sliceList);
       if (create.length > 0) {
         // console.log(create);
         // console.log("+++");
@@ -84,64 +91,83 @@ const PostAll = ({
     setParent2(moreInfo);
   };
 
-  const rememberScroll = (e) => {
+  const rememberScroll = () => {
     setScrollMove(Math.floor(window.scrollY));
   };
 
   const removePost = (e, idx) => {
     // console.log(selectPost.e.current)
-    console.log(e.target.className);
+    // console.log(e.target.className);
     idx = e.target.className;
-    console.log(selectPost.current);
+    // console.log(selectPost.current);
     // console.log(selectPost.key);
     // setPost(post.splice(e.target.className,1))
     // setMoreInfo(moreInfo.splice(e.target.className,1))
     // setCreate(create.splice(e.target.className,1))
     // setCreate2(create2.splice(e.target.className,1))
-    console.log(idx);
-    console.log(parent[idx]);
+    // console.log(idx);
+    // console.log(parent[idx]);
     if (parent[idx].deleteAbailable === true) {
-      setCreate(create.splice(idx, 1));
-      setCreate2(create2.splice(idx, 1));
-      setParent(parent.splice(idx, 1));
-      setParent2(parent2.splice(idx, 1));
+      let copy1 = parent;
+      let copy2 = parent2;
+      let foo1 = create;
+      let foo2 = create2;
+      // setCreate(create.splice(idx, 1));
+      // setCreate2(create2.splice(idx, 1));
+      // console.log(create);
+      // setParent(copy1)
+      // setParent2(copy2)
+      setCreate(foo1.splice(idx, 1));
+      setCreate2(foo2.splice(idx, 1));
+      // setParent(foo1.splice(idx, 1));
+      // setParent2(foo2.splice(idx, 1));
+      setParent(copy1.splice(idx, 1));
+      setParent2(copy2.splice(idx, 1));
+      // console.log(copy1);
+      // setPost(foo1)
+      // setMoreInfo(foo2)
+
       return;
     } else {
-      alert("타인의 게시물은 지울수없습니다");
+      closeModal()
+      // alert("타인의 게시물은 지울수없습니다");
     }
     // console.log(create);
   };
 
   useEffect(() => {
     getData();
+
   }, [moreNum]);
+  // }, [getMoreData()]);
+  // },[post]);
 
   useEffect(() => {
     postdata();
-  });
-
-  // useEffect(() => {
-  //   // setParent(post)
-  //   // setParent2(moreInfo)
-  //   setPost(post)
-  //   setMoreInfo(moreInfo)
-  //   console.log('여기도');
-  //   // setCreate(create,...post)
-  //   // setCreate2(create2, ...moreInfo)
-  //   setCreate(create)
-  //   setCreate2(create2)
-  // }, [create]);
+  },[getData]);
+  const closeModal =(e)=>{
+    const modalBox = document.querySelector('.modal_box')
+    if(modalToggle==false){
+      modalBox.classList.add('modalChange')
+      setmodalToggle(true)
+    }else{
+      modalBox.classList.remove('modalChange')
+      setmodalToggle(false)
+    }
+    
+  }
 
   return (
     <main>
       <div className="ab">
+        <Modal  msg={"타인의 게시물은 지울 수 없습니다."} closeModal={closeModal}/>
         <ol className="wrap_box">
           {post.map((item, idx) => {
             return (
               <li className="odd" key={item.id} ref={selectPost}>
                 <div className="inner">
                   <div className="first_box">
-                    <span
+                    <p
                       className={idx}
                       style={{
                         display: "inline-block",
@@ -151,21 +177,47 @@ const PostAll = ({
                       onClick={removePost}
                     >
                       ❌
-                    </span>
-                    <br />
+                    </p>
+                    <h4>{moreInfo[idx].email}</h4>
                     <img src={item.pic} />
-                    <span>{moreInfo[idx].email}</span>
                   </div>
+                  <p
+                    className="like_btn"
+                    onClick={(e) => {
+                      console.log(idx);
+                      if (item.heart) {
+                        // !item.heart);
+                        e.target.innerText = "Like 🤍";
+                        item.heart = false;
+                        console.log(item.heart);
+                        console.log("??");
+                        setParent(post)
+                        // setlk(lk="Like ❤");
+                      } else {
+                        // true);
+                        e.target.innerText = "Like ❤";
+                        item.heart = true;
+                        // setPost(post[idx].heart=true)
+                        console.log(item.heart);
+                        console.log("!!");
+                        setParent(post)
+                        // setlk(lk="Like 🤍")
+                      }
+                    }}
+                  >
+                    {item.like}
+                  </p>
                   <Link to={`/post/${idx}`} onClick={rememberScroll}>
                     <img className="post_img" src={item.random} />
-                    <div className="second_box">
+                  </Link>
+
+                  {/* <div className="second_box">
                       <span>{moreInfo[idx].email}</span>
                       <br />
                       <span>{item.title}</span>
                       <p>좋아요{item.like}</p>
                     </div>
-                    <p>{moreInfo[idx].write}</p>
-                  </Link>
+                    <p>{moreInfo[idx].write}</p> */}
                 </div>
               </li>
             );

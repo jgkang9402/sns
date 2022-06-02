@@ -10,7 +10,7 @@ import PrivateAdd from "./route/PrivateAdd";
 import PrivateRoute from "./route/PrivateRoute";
 
 function App() {
-  const [login, setLogin] = useState(true);
+  const [login, setLogin] = useState(false);
   const [userId, setUserId] = useState("");
   const [parent, setParent] = useState([]);
   const [parent2, setParent2] = useState([]);
@@ -45,9 +45,7 @@ function App() {
       scrollReturn();
     }
   }, [parent]);
-  console.log(parent);
-  useEffect(()=>{
-  })
+  // console.log(parent);
 
   return (
     <div className="App">
