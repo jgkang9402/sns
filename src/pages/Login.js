@@ -7,8 +7,13 @@ const Login = ({ setLogin, userId, setUserId }) => {
   const inputId = useRef();
   const inputPw = useRef();
   const navigate = useNavigate();
-  const [inputPwErrorMsg, setInputPwErrorMsg] = useState("");
+  const [inputErrorMsg, setInputErrorMsg] = useState("");
   const loginUser = (e) => {
+    if(inputId.current.value===""){
+      setInputErrorMsg("이메일을 입력해주세요.");
+      inputId.current.focus();
+      return;
+    }
     var regExp =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     if (
@@ -16,13 +21,13 @@ const Login = ({ setLogin, userId, setUserId }) => {
       !inputId.current.value.includes(".")
     ) {
       e.preventDefault();
-      setInputPwErrorMsg("이메일을 확인해주세요");
+      setInputErrorMsg("이메일을 형식을 확인해 주세요.");
       inputId.current.focus();
       return;
     }
-    if (inputPw.current.value.length <= 6) {
+    if (inputPw.current.value.length <= 4) {
       e.preventDefault();
-      setInputPwErrorMsg("비밀번호를 입력해주세요");
+      setInputErrorMsg("비밀번호는 5자리이상입니다");
       inputPw.current.focus();
       return;
     }
@@ -72,7 +77,7 @@ const Login = ({ setLogin, userId, setUserId }) => {
               🧐
             </button>
           </div>
-          <p className="error_txt">{inputPwErrorMsg}</p>
+          <p className="error_txt">{inputErrorMsg}</p>
           <div className="custum-checkbox">
             <input type="checkbox" id="id_save" />
             <label htmlFor="id_save">아이디 저장</label>

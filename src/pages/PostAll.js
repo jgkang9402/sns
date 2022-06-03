@@ -19,63 +19,75 @@ const PostAll = ({
   create2,
   setCreate2,
 }) => {
-  const [post, setPost] = useState([]);
-  const [moreInfo, setMoreInfo] = useState([]);
-  const selectPost = useRef();
+  // const [post, setPost] = useState([]);
+  // const [moreInfo, setMoreInfo] = useState([]);
   // let [lk, setlk] = useState("Like 🤍");
-  const [likeToggle, setLikeToggle] = useState(false);
+  // const [likeToggle, setLikeToggle] = useState(false);
+  // const [moreNum, setMoreNum] = useState(10);
+  const selectPost = useRef();
   const [modalToggle, setmodalToggle] = useState(false);
 
   const randompic = ["nature", "animals", "arch"];
 
   const getData = () => {
-    axios.get("https://jsonplaceholder.typicode.com/comments").then((res) => {
-      // console.log(res.data);
+    axios
+      .get("https://jsonplaceholder.typicode.com/comments")
+      .then((res) => {
+        // console.log(res.data);
 
-      const moreInfoList = res.data.slice(0, moreNum).map((item, i) => {
-        return {
-          email: item.email,
-          write: item.body,
-        };
+        const moreInfoList = res.data.slice(0, moreNum).map((item, i) => {
+          return {
+            email: item.email,
+            write: item.body,
+          };
+        });
+        // console.log(moreInfoList);
+        if (create.length > 0) {
+          let newArr = create2.concat(moreInfoList);
+          setParent2(newArr);
+          return;
+        }
+        setParent2(moreInfoList);
+        // setMoreInfo(moreInfoList)
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("error");
       });
-      // console.log(moreInfoList);
-      if (create.length > 0) {
-        let newArr = create2.concat(moreInfoList);
-        setMoreInfo(newArr);
-        return;
-      }
-      setMoreInfo(moreInfoList);
-    });
-    axios.get("https://jsonplaceholder.typicode.com/photos").then((res) => {
-      // console.log(res.data);
-      let sliceList = res.data.slice(0, moreNum).map((item, idx) => {
-        return {
-          id: item.id,
-          title: item.title,
-          heart: false,
-          like: item.like == false ? "Like ❤" : "Like 🤍",
-          // like: likeToggle,
-          // like: "Like 🤍",
-          // like: Math.floor(Math.random() * 20),
-          pic: `https://placeimg.com/100/100/people/${idx}`,
-          random: `https://placeimg.com/300/300/${
-            randompic[idx % 3 === 0 ? 0 : idx % 2 === 0 ? 1 : 2]
-          }/${idx}`,
-          deleteAbailable: false,
-        };
+    axios
+      .get("https://jsonplaceholder.typicode.com/photos")
+      .then((res) => {
+        // console.log(res.data);
+        let sliceList = res.data.slice(0, moreNum).map((item, idx) => {
+          return {
+            id: item.id,
+            heart: false,
+            like: item.heart == false ? "Like ❤" : "Like 🤍",
+            title: item.title,
+            // like: likeToggle,
+            // like: "Like 🤍",
+            // like: Math.floor(Math.random() * 20),
+            pic: `https://placeimg.com/100/100/people/${idx}`,
+            random: `https://placeimg.com/300/300/${
+              randompic[idx % 3 === 0 ? 0 : idx % 2 === 0 ? 1 : 2]
+            }/${idx}`,
+            deleteAbailable: false,
+          };
+        });
+        // console.log(sliceList);
+        if (create.length > 0) {
+          let newArr = create.concat(sliceList);
+          setParent(newArr);
+          return;
+        }
+        // setPost(sliceList);
+        setParent(sliceList);
+        // setPost(sliceList)
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("error");
       });
-      // console.log(sliceList);
-      if (create.length > 0) {
-        // console.log(create);
-        // console.log("+++");
-        // sliceList.concat(create);
-        // let newArr = sliceList.concat(create);
-        let newArr = create.concat(sliceList);
-        setPost(newArr);
-        return;
-      }
-      setPost(sliceList);
-    });
   };
 
   const getMoreData = () => {
@@ -87,8 +99,9 @@ const PostAll = ({
   };
 
   const postdata = () => {
-    setParent(post);
-    setParent2(moreInfo);
+    // setParent(parent);
+    // setParent2(parent2);
+    console.log("포스트데이타");
   };
 
   const rememberScroll = () => {
@@ -96,75 +109,77 @@ const PostAll = ({
   };
 
   const removePost = (e, idx) => {
-    // console.log(selectPost.e.current)
-    // console.log(e.target.className);
     idx = e.target.className;
-    // console.log(selectPost.current);
-    // console.log(selectPost.key);
-    // setPost(post.splice(e.target.className,1))
-    // setMoreInfo(moreInfo.splice(e.target.className,1))
-    // setCreate(create.splice(e.target.className,1))
-    // setCreate2(create2.splice(e.target.className,1))
-    // console.log(idx);
-    // console.log(parent[idx]);
     if (parent[idx].deleteAbailable === true) {
-      let copy1 = parent;
-      let copy2 = parent2;
-      let foo1 = create;
-      let foo2 = create2;
-      // setCreate(create.splice(idx, 1));
-      // setCreate2(create2.splice(idx, 1));
-      // console.log(create);
-      // setParent(copy1)
-      // setParent2(copy2)
-      setCreate(foo1.splice(idx, 1));
-      setCreate2(foo2.splice(idx, 1));
-      // setParent(foo1.splice(idx, 1));
-      // setParent2(foo2.splice(idx, 1));
-      setParent(copy1.splice(idx, 1));
-      setParent2(copy2.splice(idx, 1));
-      // console.log(copy1);
-      // setPost(foo1)
-      // setMoreInfo(foo2)
-
+      let slicearr1 = create.splice(idx, 1);
+      let slicearr2 = create2.splice(idx, 1);
+      console.log(slicearr1);
+      let foo1 = parent.splice(idx, 1);
+      let foo2 = parent2.splice(idx, 1);
+      console.log(foo1);
+      // splice된게 변수에 담아짐
+      let copy1 = [...parent];
+      let copy2 = [...parent2];
+      console.log(copy1);
+      setParent(copy1);
+      setParent2(copy2);
+      console.log("포스트올", create);
       return;
     } else {
-      closeModal()
-      // alert("타인의 게시물은 지울수없습니다");
+      closeModal();
     }
-    // console.log(create);
   };
 
   useEffect(() => {
+    console.log("getdata또실행?");
     getData();
-
+    console.log(parent);
   }, [moreNum]);
-  // }, [getMoreData()]);
-  // },[post]);
 
   useEffect(() => {
     postdata();
-  },[getData]);
-  const closeModal =(e)=>{
-    const modalBox = document.querySelector('.modal_box')
-    if(modalToggle==false){
-      modalBox.classList.add('modalChange')
-      setmodalToggle(true)
-    }else{
-      modalBox.classList.remove('modalChange')
-      setmodalToggle(false)
+    console.log(parent);
+    // console.log(parent2);
+  }, [parent]);
+  const closeModal = (e) => {
+    const modalBox = document.querySelector(".modal_box");
+    if (modalToggle == false) {
+      modalBox.classList.add("modalChange");
+      setmodalToggle(true);
+    } else {
+      modalBox.classList.remove("modalChange");
+      setmodalToggle(false);
     }
+  };
+
+  let redHeart = true
+  const testclass = (e)=>{
+    e.stopPropagation()
+    console.log(e.target);
     
+    if(redHeart==true){
+      e.target.classList.add('red')
+      redHeart = false
+    }else{
+      e.target.classList.remove('red')
+      redHeart = true
+
+    }
   }
 
   return (
     <main>
       <div className="ab">
-        <Modal  msg={"타인의 게시물은 지울 수 없습니다."} closeModal={closeModal}/>
+        <Modal
+          msg={"타인의 게시물은 지울 수 없습니다."}
+          closeModal={closeModal}
+        />
         <ol className="wrap_box">
-          {post.map((item, idx) => {
+          {parent.map((item, idx) => {
             return (
-              <li className="odd" key={item.id} ref={selectPost}>
+              <li className='odd' key={item.id} ref={selectPost}>
+                {/* <li className={`odd ${item.id}`} key={item.id} ref={selectPost}> */}
+                {/* <p onClick={testclass}>테스트 : {item.like}</p> */}
                 <div className="inner">
                   <div className="first_box">
                     <p
@@ -178,7 +193,10 @@ const PostAll = ({
                     >
                       ❌
                     </p>
-                    <h4>{moreInfo[idx].email}</h4>
+                    <h4>{parent2[idx].email}</h4>
+                    {/* <h4>
+                      {parent2[idx].email == "" ? "이메일" : parent2[idx].email}
+                    </h4> */}
                     <img src={item.pic} />
                   </div>
                   <p
@@ -188,36 +206,30 @@ const PostAll = ({
                       if (item.heart) {
                         // !item.heart);
                         e.target.innerText = "Like 🤍";
-                        item.heart = false;
-                        console.log(item.heart);
-                        console.log("??");
-                        setParent(post)
-                        // setlk(lk="Like ❤");
+                        let copyarr = [...parent];
+                        copyarr[idx].heart = false;
+                        copyarr[idx].like = "Like 🤍";
+                        // console.log(copyarr);
+                        console.log("하트", parent[idx].heart);
+                        setParent(copyarr);
                       } else {
                         // true);
                         e.target.innerText = "Like ❤";
-                        item.heart = true;
-                        // setPost(post[idx].heart=true)
-                        console.log(item.heart);
-                        console.log("!!");
-                        setParent(post)
-                        // setlk(lk="Like 🤍")
+                        let copyarr = [...parent];
+                        copyarr[idx].heart = true;
+                        copyarr[idx].like = "Like ❤";
+                        // console.log(copyarr);
+                        console.log("하트", parent[idx].heart);
+                        setParent(copyarr);
                       }
                     }}
+                    
                   >
                     {item.like}
                   </p>
                   <Link to={`/post/${idx}`} onClick={rememberScroll}>
                     <img className="post_img" src={item.random} />
                   </Link>
-
-                  {/* <div className="second_box">
-                      <span>{moreInfo[idx].email}</span>
-                      <br />
-                      <span>{item.title}</span>
-                      <p>좋아요{item.like}</p>
-                    </div>
-                    <p>{moreInfo[idx].write}</p> */}
                 </div>
               </li>
             );
@@ -233,6 +245,82 @@ const PostAll = ({
   );
 };
 
+//   return (
+//     <main>
+//       <div className="ab">
+//         <Modal  msg={"타인의 게시물은 지울 수 없습니다."} closeModal={closeModal}/>
+//         <ol className="wrap_box">
+//           {post.map((item, idx) => {
+//             return (
+//               <li className="odd" key={item.id} ref={selectPost}>
+//                 <div className="inner">
+//                   <div className="first_box">
+//                     <p
+//                       className={idx}
+//                       style={{
+//                         display: "inline-block",
+//                         marginBottom: "20px",
+//                         cursor: "pointer",
+//                       }}
+//                       onClick={removePost}
+//                     >
+//                       ❌
+//                     </p>
+//                     <h4>{moreInfo[idx].email}</h4>
+//                     <img src={item.pic} />
+//                   </div>
+//                   <p
+//                     className="like_btn"
+//                     onClick={(e) => {
+//                       console.log(idx);
+//                       if (item.heart) {
+//                         // !item.heart);
+//                         e.target.innerText = "Like 🤍";
+//                         item.heart = false;
+//                         console.log(item.heart);
+//                         console.log("??");
+//                         setParent(post)
+//                         // setlk(lk="Like ❤");
+//                       } else {
+//                         // true);
+//                         e.target.innerText = "Like ❤";
+//                         item.heart = true;
+//                         // setPost(post[idx].heart=true)
+//                         console.log(item.heart);
+//                         console.log("!!");
+//                         setParent(post)
+//                         // setlk(lk="Like 🤍")
+//                       }
+//                     }}
+//                   >
+//                     {item.like}
+//                   </p>
+//                   <Link to={`/post/${idx}`} onClick={rememberScroll}>
+//                     <img className="post_img" src={item.random} />
+//                   </Link>
+
+//                   {/* <div className="second_box">
+//                       <span>{moreInfo[idx].email}</span>
+//                       <br />
+//                       <span>{item.title}</span>
+//                       <p>좋아요{item.like}</p>
+//                     </div>
+//                     <p>{moreInfo[idx].write}</p> */}
+//                 </div>
+//               </li>
+//             );
+//           })}
+//         </ol>
+//         <div className="box_more">
+//           <button className="more_button" onClick={getMoreData}>
+//             더보기
+//           </button>
+//         </div>
+//       </div>
+//     </main>
+//   );
+// };
+//
 export default PostAll;
 
 {

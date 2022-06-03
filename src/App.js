@@ -12,6 +12,8 @@ import PrivateRoute from "./route/PrivateRoute";
 function App() {
   const [login, setLogin] = useState(false);
   const [userId, setUserId] = useState("");
+  // const [login, setLogin] = useState(true);
+  // const [userId, setUserId] = useState("abc123@naver.com");
   const [parent, setParent] = useState([]);
   const [parent2, setParent2] = useState([]);
   const [moreNum, setMoreNum] = useState(10);
@@ -34,6 +36,9 @@ function App() {
   };
   useEffect(() => {
     // console.log(morescr.current);
+    if(parent.length==parent2.length){
+      return
+    }
     if (morescr.current === parent.length) {
       morescr.current = parent.length;
       scrollReturn();
@@ -44,8 +49,18 @@ function App() {
       // console.log("여기냐");
       scrollReturn();
     }
+    // setParent(parent)
+    // setParent2(parent2)
   }, [parent]);
-  // console.log(parent);
+  useEffect(()=>{
+    // setParent(parent.concat(create))
+    // setParent(parent2.concat(create2))
+    console.log("앱",create);
+  },[create])
+  console.log(parent);
+  // console.log(parent2);
+  // console.log(moreNum);
+  console.log("크리에이트",create);
 
   return (
     <div className="App">
@@ -77,6 +92,8 @@ function App() {
               setLogin={setLogin}
               parent={parent}
               parent2={parent2}
+              setParent={setParent}
+              setParent2={setParent2}
             />
           }
         />

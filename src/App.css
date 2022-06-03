@@ -111,6 +111,9 @@ main {
 .inner p {
   /* height: 100px; */
 }
+.red {
+  color: red;
+}
 
 @media screen and (max-width: 1199px) {
 }

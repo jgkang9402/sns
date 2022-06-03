@@ -65,10 +65,11 @@ const AddPost = ({
   };
   useEffect(() => {
     // if (addPost.hasOwnProperty("random")) {
-    if (addPost.length !== 0) {
+    if (addPost.length != 0) {
       check();
     }
-  }, [addPost]);
+  });
+  // }, [addPost]);
 
   return (
     <div>
