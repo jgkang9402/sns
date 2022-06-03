@@ -1,14 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
 
-
+a {
+  text-decoration: none;
+}
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 10vmin;
-  pointer-events: none;
-  display: block;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -29,12 +25,61 @@
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   background: linear-gradient(180deg, #fbf4f4, aqua);
-
+}
+.logo_box {
+  display: flex;
+  align-items: center;
+  margin-left: 5vw;
+}
+.App-logo {
+  height: 10vmin;
+  pointer-events: none;
+  display: inline;
+  margin-right: 0;
+}
+.logo_box h1 {
+  margin-left: 0;
+  color: aliceblue;
+  font-family: "orbitron";
 }
 
-
+.navbar nav {
+  margin-right: 10vw;
+  display: flex;
+}
+.navbar nav button {
+  font-size: 0.8em;
+}
+.addpost_btn {
+  font-size: 1.5em !important ;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid turquoise;
+  background-color: #fff;
+  width: 10vw;
+  height: 5vh;
+}
+.addpost_btn:hover {
+  /* background-color: rgba(85, 141, 210, 0.827); */
+  background-color: cadetblue;
+}
+.login_btn {
+  cursor: pointer;
+  border: 1px solid turquoise;
+  background-color: #fff;
+  border-radius: 5px;
+  width: 10vw;
+  height: 5vh;
+}
+.login_btn:hover {
+  background-color: cadetblue;
+}
+.login_icon {
+  padding-right: 5px;
+}
 .tothetop {
   cursor: pointer;
   position: fixed;
@@ -45,14 +90,10 @@
   font-size: 40px;
 }
 
-
 /* 로그인 */
-.error_txt{
+.error_txt {
   color: red;
 }
-
-
-
 
 main {
   margin-left: 0;
@@ -60,9 +101,9 @@ main {
   position: relative;
 }
 
-.wrap_box{
+.wrap_box {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   margin: 0;
   padding-left: 0;
 }
@@ -79,26 +120,32 @@ main {
   width: 100%;
   background: #fff;
   /* padding: 14px; */
-  border-radius: 25px;
+  border-radius: 25px 25px 5px 5px;
   height: 450px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  overflow: hidden;
 }
 
-.inner .post_img {
+.post_img {
   width: 100%;
-  /* max-width: 300px; */
-  min-height: 150px;
+  min-height: 250px;
+  max-width: 300px;
+  max-height: 300px;
+}
+.user_img {
+  max-width: 100px;
+  max-height: 100px;
 }
 
 .inner .first_box {
-  font: bold 11px/1 "orbitron";
-  /* letter-spacing: 1px; */
+  font: bold 0.5rem/1 "orbitron";
+  letter-spacing: 1px;
   color: #444;
-  margin-top: 15px;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
 }
-.first_box img {
+.all_user_img {
   width: 50%;
   border-radius: 50%;
 }
@@ -108,41 +155,84 @@ main {
   color: #777;
   margin-bottom: 15px;
 }
-.inner p {
-  /* height: 100px; */
+.like_btn {
+  cursor: pointer;
+  display: inline;
 }
+
 .red {
   color: red;
 }
 
 @media screen and (max-width: 1199px) {
+  .wrap_box {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 
 @media screen and (max-width: 899px) {
-  .wrap_box{
+  .wrap_box {
     grid-template-columns: repeat(4, 1fr);
   }
-
 }
 
 @media screen and (max-width: 799px) {
-  .wrap_box{
+  .wrap_box {
     grid-template-columns: repeat(3, 1fr);
   }
-  
 }
 
 @media screen and (max-width: 699px) {
-  .wrap_box{
+  .wrap_box {
     grid-template-columns: repeat(2, 1fr);
   }
-
+  .inner .first_box {
+  }
+  .all_user_img {
+    width: 30%;
+  }
 }
 
-@media screen and (max-width: 615px) {
-  .wrap_box{
+@media screen and (max-width: 550px) {
+  .App-logo {
+    display: none;
+  }
+  .wrap_box {
     grid-template-columns: repeat(1, 1fr);
   }
+  .inner {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+  .first_box p{
+    position: relative;
+    top: -20vw;
+    font-size: 1.5rem;
+  }
+  .all_user_img{
+    width: 75%;
+  }
+  .first_box h4 {
+    width: 20%;
+  }
+
+  .like_btn {
+    position: absolute;
+    bottom: 10vw;
+    right: 10vw;
+  }
+  .post_img {
+    height: 100%;
+    min-width: 300px;
+    min-height: 300px;
+    margin-left: 5px;
+    border-radius: 5px;
+  }
+
+
 }
 
 .box_more {
@@ -156,24 +246,21 @@ main {
   height: 100px;
 }
 
-.like_btn {
-  cursor: pointer;
-}
-
-
 /* 디테일 */
+.detail_wrap_box {
+  position: relative;
+  border: 1px solid #333;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+  rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+  rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  margin: 0 auto;
+  width: 80%;
+}
 .go-back {
   cursor: pointer;
   font-size: 40px;
   position: absolute;
   left: 5px;
-}
-.detail_wrap_box{
-  position: relative;
-  border: 1px solid #333;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  margin: 0 auto;
-  width: 80%;
 }
 
 .detail_first_box {
@@ -183,15 +270,13 @@ main {
   margin-bottom: 20px;
   border-bottom: 1px solid #333;
 }
-.detail_first_box img{
+.detail_first_box img {
   border-radius: 50%;
 }
 
-
-
 /* 모달 */
-.modal_box{
-  background-color: rgba(255, 255, 255, .8);
+.modal_box {
+  background-color: rgba(255, 255, 255, 0.8);
   width: 30vw;
   height: 20vh;
   /* display: none; */
@@ -200,22 +285,14 @@ main {
   top: -100%;
   opacity: 0;
   transform: translate(-50%, -50%);
-  
 }
 .modalChange {
-  transition: .5s;
+  transition: 0.5s;
   top: 50%;
   opacity: 1;
   color: red;
 }
-.closebtn{
+.closebtn {
   width: 100%;
   height: 100%;
-
 }
-
-
-
-
-
-

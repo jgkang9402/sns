@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef, createContext } from "react";
+import { useEffect } from "react";
+import { useRef } from "react";
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -7,20 +9,21 @@ import PostAll from "./pages/PostAll";
 import PrivateAdd from "./route/PrivateAdd";
 import PrivateRoute from "./route/PrivateRoute";
 
-export const Context1 = createContext();
-
 function App() {
-  const [login, setLogin] = useState(false);
-  const [userId, setUserId] = useState("");
-  // const [login, setLogin] = useState(true);
-  // const [userId, setUserId] = useState("abc123@naver.com");
+  // const [login, setLogin] = useState(false);
+  // const [userId, setUserId] = useState("");
+  const [login, setLogin] = useState(true);
+  const [userId, setUserId] = useState("abc123@naver.com");
   const [parent, setParent] = useState([]);
   const [parent2, setParent2] = useState([]);
-  const [moreNum, setMoreNum] = useState(20);
+  const [moreNum, setMoreNum] = useState(10);
   const [scrollMove, setScrollMove] = useState(0);
   const [create, setCreate] = useState([]);
   const [create2, setCreate2] = useState([]);
   const morescr = useRef(0);
+  const [apiData, setApiData] = useState([])
+  const [apiData2, setApiData2] = useState([])
+
 
   const moveToPage = () => {
     window.scrollTo({
@@ -36,8 +39,8 @@ function App() {
   };
   useEffect(() => {
     // console.log(morescr.current);
-    if (parent.length == parent2.length) {
-      return;
+    if(parent.length==parent2.length){
+      return
     }
     if (morescr.current === parent.length) {
       morescr.current = parent.length;
@@ -52,15 +55,54 @@ function App() {
     // setParent(parent)
     // setParent2(parent2)
   }, [parent]);
-  useEffect(() => {
+  useEffect(()=>{
     // setParent(parent.concat(create))
     // setParent(parent2.concat(create2))
-    // console.log("앱", create);
-  }, [create]);
-  // console.log(parent);
+    // console.log("앱",create);
+  },[create])
+  useEffect(()=>{
+    // setParent(parent.concat(create))
+    // setParent(parent2.concat(create2))
+    // console.log("앱",create);
+    console.log("여기냐");
+    // setParent(apiData)
+    // setParent2(apiData2)
+    let arr = apiData.slice(0,moreNum)
+    let arr2 = apiData2.slice(0,moreNum)
+    console.log(arr);
+    setParent(arr)
+    setParent2(arr2)
+
+    // console.log(apiData);
+    
+  },[apiData])
+
+  const getMoreData = () => {
+    setMoreNum(moreNum + 10);
+    window.scrollTo({
+      top: window.scrollY,
+      behavior: "auto",
+    });
+  };
+  
+  useEffect(() => {
+    // getData();
+    // getMoreData()
+    console.log(moreNum);
+    if(parent.length!=moreNum){
+      // getMoreData()
+    }else{
+      console.log(parent.length);
+      console.log(moreNum);
+    }
+    console.log(parent);
+  }, [moreNum]);
+
+  console.log(parent);
   // console.log(parent2);
   // console.log(moreNum);
-  // console.log("크리에이트", create);
+  // console.log("크리에이트",create);
+  // console.log(apiData);
 
   return (
     <div className="App">
@@ -81,7 +123,10 @@ function App() {
               setCreate={setCreate}
               create2={create2}
               setCreate2={setCreate2}
-              userId={userId}
+              apiData={apiData}
+              setApiData={setApiData}
+              apiData2={apiData2}
+              setApiData2={setApiData2}
             />
           }
         />
@@ -116,11 +161,19 @@ function App() {
         <Route
           path="/addpost"
           element={
-            <Context1.Provider
-              value={{ login, create, setCreate, create2, setCreate2, userId }}
-            >
-              <PrivateAdd login={login} />
-            </Context1.Provider>
+            <PrivateAdd
+              login={login}
+              setLogin={setLogin}
+              parent={parent}
+              parent2={parent2}
+              setParent={setParent}
+              setParent2={setParent2}
+              create={create}
+              setCreate={setCreate}
+              create2={create2}
+              setCreate2={setCreate2}
+              userId={userId}
+            />
           }
         />
       </Routes>

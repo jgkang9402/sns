@@ -1,6 +1,4 @@
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const PostDetail = ({ parent, parent2, setParent, setParent2 }) => {
@@ -43,15 +41,15 @@ const PostDetail = ({ parent, parent2, setParent, setParent2 }) => {
           🔙
         </span>
         <div className="detail_first_box">
-          <img src={parent[id].pic} />
+          <img className="user_img" src={parent[id].pic} />
           <span>{parent2[id].email}</span>
         </div>
-        <img src={parent[id].random} />
+        <img className="post_img" src={parent[id].random} />
         <div>
           <div>
             <span>Writer : {parent2[id].email}</span>
             <br />
-            <span>Title : {parent[id].title}</span>
+            <span>Title : {parent[id].title}</span><br />
             <p className="like_btn" onClick={likeToggle}>
               {parent[id].like}
             </p>

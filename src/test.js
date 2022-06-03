@@ -1,5 +1,8 @@
 import axios from "axios";
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
+import { useRef } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "../components/Modal";
 
@@ -15,7 +18,10 @@ const PostAll = ({
   setCreate,
   create2,
   setCreate2,
-  userId,
+  apiData,
+  setApiData,
+  apiData2,
+  setApiData2,
 }) => {
   // const [post, setPost] = useState([]);
   // const [moreInfo, setMoreInfo] = useState([]);
@@ -25,6 +31,9 @@ const PostAll = ({
   const selectPost = useRef();
   const [modalToggle, setmodalToggle] = useState(false);
 
+  // const [apiData, setApiData] = useState([])
+  // const [apiData2, setApiData2] = useState([])
+
   const randompic = ["nature", "animals", "arch"];
 
   const getData = () => {
@@ -33,7 +42,7 @@ const PostAll = ({
       .then((res) => {
         // console.log(res.data);
 
-        const moreInfoList = res.data.slice(0, moreNum).map((item, i) => {
+        const moreInfoList = res.data.slice(0, 30).map((item, i) => {
           return {
             email: item.email,
             write: item.body,
@@ -42,21 +51,21 @@ const PostAll = ({
         // console.log(moreInfoList);
         if (create.length > 0) {
           let newArr = create2.concat(moreInfoList);
-          setParent2(newArr);
+          setApiData2(newArr);
           return;
         }
-        setParent2(moreInfoList);
+        setApiData2(moreInfoList);
         // setMoreInfo(moreInfoList)
       })
       .catch((error) => {
-        // console.log(error);
+        console.log(error);
         alert("error");
       });
     axios
       .get("https://jsonplaceholder.typicode.com/photos")
       .then((res) => {
         // console.log(res.data);
-        let sliceList = res.data.slice(0, moreNum).map((item, idx) => {
+        let sliceList = res.data.slice(0, 30).map((item, idx) => {
           return {
             id: item.id,
             heart: false,
@@ -69,17 +78,17 @@ const PostAll = ({
             random: `https://placeimg.com/300/300/${
               randompic[idx % 3 === 0 ? 0 : idx % 2 === 0 ? 1 : 2]
             }/${idx}`,
-            deleteAvailable: false,
+            deleteAbailable: false,
           };
         });
         // console.log(sliceList);
         if (create.length > 0) {
           let newArr = create.concat(sliceList);
-          setParent(newArr);
+          setApiData(newArr);
           return;
         }
         // setPost(sliceList);
-        setParent(sliceList);
+        setApiData(sliceList);
         // setPost(sliceList)
       })
       .catch((error) => {
@@ -87,6 +96,32 @@ const PostAll = ({
         alert("error");
       });
   };
+
+  useEffect(()=>{
+    // setParent(parent.concat(create))
+    // setParent(parent2.concat(create2))
+    // console.log("앱",create);
+    if(apiData==""){
+      console.log(123);
+      getData()
+    }else{
+      console.log("여기냐");
+      // let arr = apiData.slice(0,moreNum)
+      // let arr2 = apiData2.slice(0,moreNum)
+      // console.log(arr);
+      // setParent(arr)
+      // setParent2(arr2)
+
+      // setParent(apiData)
+      // setParent2(apiData2)
+      console.log(apiData);
+    }
+
+    
+  },[])
+
+  // setParent(apiData)
+  // setParent2(apiData2)
 
   const getMoreData = () => {
     setMoreNum(moreNum + 10);
@@ -99,7 +134,7 @@ const PostAll = ({
   const postdata = () => {
     // setParent(parent);
     // setParent2(parent2);
-    // console.log("포스트데이타");
+    console.log("포스트데이타");
   };
 
   const rememberScroll = () => {
@@ -108,46 +143,44 @@ const PostAll = ({
 
   const removePost = (e, idx) => {
     idx = e.target.className;
-    // console.log(idx);
-    // console.log(userId);
-    // console.log(parent2[idx].email);
-
-    if (parent[idx].deleteAvailable === true || parent2[idx].email == userId) {
+    if (parent[idx].deleteAbailable === true) {
       let slicearr1 = create.splice(idx, 1);
       let slicearr2 = create2.splice(idx, 1);
-      // console.log(slicearr1);
+      console.log(slicearr1);
       let foo1 = parent.splice(idx, 1);
       let foo2 = parent2.splice(idx, 1);
-      // console.log(foo1);
+      console.log(foo1);
       // splice된게 변수에 담아짐
       let copy1 = [...parent];
       let copy2 = [...parent2];
-      // console.log(copy1);
+      console.log(copy1);
       setParent(copy1);
       setParent2(copy2);
-      // console.log("포스트올", create);
+      console.log("포스트올", create);
       return;
     } else {
       closeModal();
     }
   };
-  // useMemo(() => {
-  //   return getData();
-  // },[moreNum]);
 
-  useEffect(() => {
-    // console.log("getdata또실행?");
-    getData();
-    // console.log(parent);
-  }, [moreNum]);
+  // useEffect(() => {
+  //   // getData();
+  //   // getMoreData()
+  //   if(parent.length!=moreNum){
+  //     // getMoreData()
+  //   }else{
+  //     console.log(parent.length);
+  //     console.log(moreNum);
+  //   }
+  //   console.log(parent);
+  // }, [moreNum]);
 
   useEffect(() => {
     postdata();
-    // console.log(parent);
+    console.log(parent);
     // console.log(parent2);
   }, [parent]);
-
-  const closeModal = () => {
+  const closeModal = (e) => {
     const modalBox = document.querySelector(".modal_box");
     if (modalToggle == false) {
       modalBox.classList.add("modalChange");
@@ -158,18 +191,19 @@ const PostAll = ({
     }
   };
 
-  // let redHeart = true;
-  // const testclass = (e) => {
-  //   console.log(e.target);
+  let redHeart = true;
+  const testclass = (e) => {
+    e.stopPropagation();
+    console.log(e.target);
 
-  //   if (redHeart == true) {
-  //     e.target.classList.add("red");
-  //     redHeart = false;
-  //   } else {
-  //     e.target.classList.remove("red");
-  //     redHeart = true;
-  //   }
-  // };
+    if (redHeart == true) {
+      e.target.classList.add("red");
+      redHeart = false;
+    } else {
+      e.target.classList.remove("red");
+      redHeart = true;
+    }
+  };
 
   return (
     <main>
@@ -201,7 +235,7 @@ const PostAll = ({
                     {/* <h4>
                       {parent2[idx].email == "" ? "이메일" : parent2[idx].email}
                     </h4> */}
-                    <img className="all_user_img" src={item.pic} />
+                    <img src={item.pic} />
                   </div>
                   <p
                     className="like_btn"
@@ -214,7 +248,7 @@ const PostAll = ({
                         copyarr[idx].heart = false;
                         copyarr[idx].like = "Like 🤍";
                         // console.log(copyarr);
-                        // console.log("하트", parent[idx].heart);
+                        console.log("하트", parent[idx].heart);
                         setParent(copyarr);
                       } else {
                         // true);
@@ -247,5 +281,6 @@ const PostAll = ({
     </main>
   );
 };
-export default PostAll;
 
+
+export default PostAll;
