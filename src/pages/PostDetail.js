@@ -13,23 +13,20 @@ const PostDetail = ({ parent, parent2, setParent, setParent2 }) => {
     // console.log(e.target.innerText);
     console.log(parent[id].heart);
     if (parent[id].heart) {
-      e.target.innerText = "Like 0";
+      e.target.innerText = "Like 🤍";
       let copyarr = [...parent];
       copyarr[id].heart = false;
       console.log(copyarr);
-      console.log("하트",parent[id].heart);
-      setParent(copyarr)
-
+      console.log("하트", parent[id].heart);
+      setParent(copyarr);
       // setParent(copyarr);
-
-      // console.log(parent[id].like);
     } else {
-      e.target.innerText = "Like 1";
+      e.target.innerText = "Like ❤";
       let copyarr = [...parent];
       copyarr[id].heart = true;
       console.log(copyarr);
-      console.log("하트",parent[id].heart);
-      setParent(copyarr)
+      console.log("하트", parent[id].heart);
+      setParent(copyarr);
       // console.log(parent[id].like);
     }
     // parent[id].heart==false?parent[id].like="Like 🤍":
@@ -49,7 +46,8 @@ const PostDetail = ({ parent, parent2, setParent, setParent2 }) => {
           <div>
             <span>Writer : {parent2[id].email}</span>
             <br />
-            <span>Title : {parent[id].title}</span><br />
+            <span>Title : {parent[id].title}</span>
+            <br />
             <p className="like_btn" onClick={likeToggle}>
               {parent[id].like}
             </p>

@@ -22,12 +22,12 @@ function App() {
   const [create2, setCreate2] = useState([]);
   const morescr = useRef(0);
 
-  const moveToPage = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+  // const moveToPage = () => {
+  //   window.scrollTo({
+  //     top: 0,
+  //     behavior: "smooth",
+  //   });
+  // };
   const scrollReturn = () => {
     window.scrollTo({
       top: scrollMove,
@@ -82,6 +82,7 @@ function App() {
               create2={create2}
               setCreate2={setCreate2}
               userId={userId}
+              login={login}
             />
           }
         />
@@ -124,9 +125,9 @@ function App() {
           }
         />
       </Routes>
-      <button className="tothetop" onClick={moveToPage}>
+      {/* <button className="tothetop" onClick={moveToPage}>
         ↑
-      </button>
+      </button> */}
     </div>
   );
 }

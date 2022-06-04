@@ -27,6 +27,7 @@ a {
   align-items: center;
   justify-content: space-between;
   background: linear-gradient(180deg, #fbf4f4, aqua);
+  border-bottom: 1px solid #fbf4f4;
 }
 .logo_box {
   display: flex;
@@ -91,14 +92,89 @@ a {
 }
 
 /* 로그인 */
-.error_txt {
+#wrapper-login {
+  font-size: 50px;
+  padding: 50px;
+  color: #1ecad3;
+}
+#wrapper-login form * {
+  /* border: 1px solid #000; */
+}
+.form-login {
+  text-align: start;
+  background-color: #fff;
+  position: relative;
+  width: 70vw;
+  height: 30vh;
+  margin: 0 auto;
+  border: 2px solid #1ecad3;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login_first_box{
+  margin-right: 20px;
+}
+.login_first_box div, .login_first_box p{
+  height: 9vh;
+}
+.login_first_box .pw-box{
+  margin-top: 1px;
+}
+.form-login span {
+  display: inline-block;
+  text-align: end;
+  width: 10vw;
+  font-size: 20px;
+  font-weight: bold;
+  color: #1ecad3;
+  margin-right: 1vw;
+}
+.form-login input {
+  width: 20vw;
+  height: 5vh;
+  border: 1px solid #1ecad3;
+  border-radius: 5px;
+  font-size: 18px;
+  padding-left: 5px;
+  color: #666;
+}
+.btn-login {
+  width: 13vw;
+  height: 13vh;
+  border: 1px solid #1ecad3;
+  border-radius: 5px;
+  background-color: #1ecad3;
+  font-size: 15px;
+  color: #fff;
+  text-shadow: 1px 1px 0 #666;
+  cursor: pointer;
+  /* position: absolute; */
+}
+.btn-login:hover {
+  background-color: azure;
+  color: aqua;
+  border: 3px solid;
+  transition: 0.5s ease-out;
+}
+.login_error{
   color: red;
+  background-color: #fff;
+  border: 1px solid #1ecad3;
+  border-radius: 10px;
+  width: 70vw;
+  margin: 0 auto;
 }
 
+/* 메인페이지 */
 main {
   margin-left: 0;
   background: linear-gradient(180deg, aqua, #fbf4f4);
   position: relative;
+  padding: 0 50px;
 }
 
 .wrap_box {
@@ -109,9 +185,6 @@ main {
 }
 
 .odd {
-  /* width: 20%; */
-  /* float: left; */
-
   overflow: hidden;
   padding: 12px;
 }
@@ -164,7 +237,7 @@ main {
   color: red;
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 1290px) {
   .wrap_box {
     grid-template-columns: repeat(5, 1fr);
   }
@@ -207,12 +280,12 @@ main {
     justify-content: space-between;
     position: relative;
   }
-  .first_box p{
+  .first_box p {
     position: relative;
     top: -20vw;
     font-size: 1.5rem;
   }
-  .all_user_img{
+  .all_user_img {
     width: 75%;
   }
   .first_box h4 {
@@ -231,8 +304,6 @@ main {
     margin-left: 5px;
     border-radius: 5px;
   }
-
-
 }
 
 .box_more {
@@ -251,8 +322,8 @@ main {
   position: relative;
   border: 1px solid #333;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-  rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-  rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   margin: 0 auto;
   width: 80%;
 }
@@ -282,17 +353,138 @@ main {
   /* display: none; */
   position: fixed;
   left: 50%;
-  top: -100%;
+  top: 50;
   opacity: 0;
+  z-index: -1;
   transform: translate(-50%, -50%);
 }
 .modalChange {
   transition: 0.5s;
   top: 50%;
   opacity: 1;
+  z-index: 1;
   color: red;
 }
 .closebtn {
   width: 100%;
   height: 100%;
+}
+
+/* 포스트생성 addpost */
+.sub_top_box, .form_wrapper {
+  margin-top: 0;
+  background: linear-gradient(180deg, aqua, #fff);
+  height: 87vh;
+}
+.sub_top_box h2 {
+  margin-top: 0;
+  padding-top: 10px;
+  color: cadetblue;
+  font-family: "orbitron";
+}
+.add_wrap_box {
+  /* color: aqua; */
+}
+.add_wrap_box input,
+.add_wrap_box textarea {
+  color: darkcyan;
+}
+
+.add_title {
+  width: 450px;
+  height: 32px;
+  padding: 0 10px;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border: 1px solid turquoise;
+  font-weight: 800;
+}
+.add_write {
+  width: 450px;
+  height: 330px;
+  padding: 10px;
+  font-size: 1rem;
+  resize: none;
+  border: 1px solid turquoise;
+  border-radius: 5px;
+  font-weight: 700;
+  /* color: aliceblue; */
+}
+/* .add_photo{
+  width: 300px;
+} */
+.filebox .upload-name {
+  display: inline-block;
+  height: 40px;
+  padding: 0 10px;
+  vertical-align: middle;
+  /* border: 1px solid #dddddd; */
+  width: 300px;
+  /* color: #999999; */
+}
+.filebox label {
+  display: inline-block;
+  padding: 10px 20px;
+  color: cadetblue;
+  vertical-align: middle;
+  /* background-color: #fff; */
+  cursor: pointer;
+  /* height: 40px; */
+  margin-left: 10px;
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+
+  background-image: url("./camera.png");
+  background-color: cadetblue;
+  background-size: 50%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  /* box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); */
+}
+.filebox label:hover {
+  background-color: orange;
+}
+.filebox input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+.imgload {
+  font-size: 1rem;
+  padding: 0 10px;
+  width: 320px;
+  height: 50px;
+}
+
+.submit_btn {
+  width: 300px;
+  height: 100px;
+  margin: 10px 0 50px 0;
+  font-family: "orbitron";
+  font-size: 2rem;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.submit_btn:hover {
+  background-color: orange;
+  color: #fff;
+}
+
+.error_txt {
+  color: #fff;
+  margin: 0 auto;
+  background-color: red;
+  width: 470px;
+  height: 50px;
+  font-size: 1.5rem;
+  display: none;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 50px;
 }

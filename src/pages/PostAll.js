@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
 
 const PostAll = ({
@@ -12,18 +12,14 @@ const PostAll = ({
   setMoreNum,
   setScrollMove,
   create,
-  setCreate,
   create2,
-  setCreate2,
   userId,
+  login,
 }) => {
-  // const [post, setPost] = useState([]);
-  // const [moreInfo, setMoreInfo] = useState([]);
-  // let [lk, setlk] = useState("Like 🤍");
-  // const [likeToggle, setLikeToggle] = useState(false);
-  // const [moreNum, setMoreNum] = useState(10);
   const selectPost = useRef();
   const [modalToggle, setmodalToggle] = useState(false);
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
 
   const randompic = ["nature", "animals", "arch"];
 
@@ -96,22 +92,38 @@ const PostAll = ({
     });
   };
 
-  const postdata = () => {
-    // setParent(parent);
-    // setParent2(parent2);
-    // console.log("포스트데이타");
+  const rememberScroll = (e) => {
+    setScrollMove(Math.floor(window.scrollY));
+    if (login == false) {
+      e.preventDefault();
+      console.log(123);
+      closeModal();
+    }
   };
 
-  const rememberScroll = () => {
-    setScrollMove(Math.floor(window.scrollY));
+  const closeModal = (e) => {
+    const modalBox = document.querySelector(".modal_box");
+    if (login == false) {
+      setMsg("로그인을 해주세요");
+      setmodalToggle(true);
+      modalBox.classList.add("modalChange");
+      if (modalToggle == true) {
+        modalBox.classList.remove("modalChange");
+        setmodalToggle(false);
+        navigate("/login");
+      }
+    } else if (modalToggle == false) {
+      modalBox.classList.add("modalChange");
+      setmodalToggle(true);
+      setMsg("타인의 게시물은 삭제 할 수 없습니다");
+    } else {
+      modalBox.classList.remove("modalChange");
+      setmodalToggle(false);
+    }
   };
 
   const removePost = (e, idx) => {
     idx = e.target.className;
-    // console.log(idx);
-    // console.log(userId);
-    // console.log(parent2[idx].email);
-
     if (parent[idx].deleteAvailable === true || parent2[idx].email == userId) {
       let slicearr1 = create.splice(idx, 1);
       let slicearr2 = create2.splice(idx, 1);
@@ -125,8 +137,6 @@ const PostAll = ({
       // console.log(copy1);
       setParent(copy1);
       setParent2(copy2);
-      // console.log("포스트올", create);
-      return;
     } else {
       closeModal();
     }
@@ -141,43 +151,17 @@ const PostAll = ({
     // console.log(parent);
   }, [moreNum]);
 
-  useEffect(() => {
-    postdata();
-    // console.log(parent);
-    // console.log(parent2);
-  }, [parent]);
-
-  const closeModal = () => {
-    const modalBox = document.querySelector(".modal_box");
-    if (modalToggle == false) {
-      modalBox.classList.add("modalChange");
-      setmodalToggle(true);
-    } else {
-      modalBox.classList.remove("modalChange");
-      setmodalToggle(false);
-    }
+  const moveToPage = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
-
-  // let redHeart = true;
-  // const testclass = (e) => {
-  //   console.log(e.target);
-
-  //   if (redHeart == true) {
-  //     e.target.classList.add("red");
-  //     redHeart = false;
-  //   } else {
-  //     e.target.classList.remove("red");
-  //     redHeart = true;
-  //   }
-  // };
 
   return (
     <main>
-      <div className="ab">
-        <Modal
-          msg={"타인의 게시물은 지울 수 없습니다."}
-          closeModal={closeModal}
-        />
+      <div className="main_box">
+        <Modal msg={msg} closeModal={closeModal} />
         <ol className="wrap_box">
           {parent.map((item, idx) => {
             return (
@@ -243,9 +227,11 @@ const PostAll = ({
             더보기
           </button>
         </div>
+        <button className="tothetop" onClick={moveToPage}>
+          ↑
+        </button>
       </div>
     </main>
   );
 };
 export default PostAll;
-

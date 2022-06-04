@@ -1,4 +1,4 @@
-import React,{ useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,7 @@ const Login = ({ setLogin, userId, setUserId }) => {
   const navigate = useNavigate();
   const [inputErrorMsg, setInputErrorMsg] = useState("");
   const loginUser = (e) => {
-    if(inputId.current.value===""){
+    if (inputId.current.value === "") {
       setInputErrorMsg("이메일을 입력해주세요.");
       inputId.current.focus();
       return;
@@ -48,20 +48,20 @@ const Login = ({ setLogin, userId, setUserId }) => {
   };
 
   return (
-    <div>
-      <div className="form-wrapper" id="wrapper-login">
-        {/* <img src="https://i.imgur.com/iqskGqe.jpg" alt="bg1" /> */}
-        <form className="form-login">
-          <span>아이디 : </span>
-          <input
-            ref={inputId}
-            type="text"
-            placeholder="Username"
-            className="input-username"
-            id="input-username"
-            // autocomplete="off"
-          />
-          {/* <p className="error_txt">???</p> */}
+    <div className="form_wrapper" id="wrapper-login">
+      <form className="form-login">
+        <div className="login_first_box">
+          <div className="id-box">
+            <span className="id_label">아이디 : </span>
+            <input
+              ref={inputId}
+              type="text"
+              placeholder="Username"
+              className="input-username"
+              id="input-username"
+              // autocomplete="off"
+            />
+          </div>
           <div className="pw-box">
             <span>비밀번호 : </span>
             <input
@@ -76,19 +76,21 @@ const Login = ({ setLogin, userId, setUserId }) => {
               🧐
             </button>
           </div>
-          <p className="error_txt">{inputErrorMsg}</p>
-          <div className="custum-checkbox">
-            <input type="checkbox" id="id_save" />
-            <label htmlFor="id_save">아이디 저장</label>
-          </div>
+        </div>
+        <div className="login_btn_box">
           <button onClick={loginUser} type="button" className="btn-login">
             LOGIN
           </button>
-        </form>
-        <p>
-          No account? <a href="#wrapper-signup">Sign up</a>
-        </p>
-      </div>
+        </div>
+      </form>
+      {/* <div className="custum-checkbox">
+            <input type="checkbox" id="id_save" />
+            <label htmlFor="id_save">아이디 저장</label>
+          </div> */}
+      <p className="login_error">{inputErrorMsg}</p>
+      <p>
+        No account? <a href="#wrapper-signup">Sign up</a>
+      </p>
     </div>
   );
 };
