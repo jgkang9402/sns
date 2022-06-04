@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
 
@@ -15,6 +15,8 @@ const PostAll = ({
   create2,
   userId,
   login,
+  allData,
+  setAllData,
 }) => {
   const selectPost = useRef();
   const [modalToggle, setmodalToggle] = useState(false);
@@ -42,11 +44,10 @@ const PostAll = ({
           return;
         }
         setParent2(moreInfoList);
-        // setMoreInfo(moreInfoList)
       })
       .catch((error) => {
         // console.log(error);
-        alert("error");
+        alert(error);
       });
     axios
       .get("https://jsonplaceholder.typicode.com/photos")
@@ -58,9 +59,6 @@ const PostAll = ({
             heart: false,
             like: item.heart == false ? "Like ❤" : "Like 🤍",
             title: item.title,
-            // like: likeToggle,
-            // like: "Like 🤍",
-            // like: Math.floor(Math.random() * 20),
             pic: `https://placeimg.com/100/100/people/${idx}`,
             random: `https://placeimg.com/300/300/${
               randompic[idx % 3 === 0 ? 0 : idx % 2 === 0 ? 1 : 2]
@@ -68,19 +66,16 @@ const PostAll = ({
             deleteAvailable: false,
           };
         });
-        // console.log(sliceList);
         if (create.length > 0) {
           let newArr = create.concat(sliceList);
           setParent(newArr);
           return;
         }
-        // setPost(sliceList);
         setParent(sliceList);
-        // setPost(sliceList)
       })
       .catch((error) => {
         console.log(error);
-        alert("error");
+        alert(error);
       });
   };
 
@@ -146,9 +141,8 @@ const PostAll = ({
   // },[moreNum]);
 
   useEffect(() => {
-    // console.log("getdata또실행?");
+    console.log("getdata또실행?");
     getData();
-    // console.log(parent);
   }, [moreNum]);
 
   const moveToPage = () => {
@@ -163,11 +157,9 @@ const PostAll = ({
       <div className="main_box">
         <Modal msg={msg} closeModal={closeModal} />
         <ol className="wrap_box">
-          {parent.map((item, idx) => {
+          {allData.map((item, idx) => {
             return (
               <li className="odd" key={item.id} ref={selectPost}>
-                {/* <li className={`odd ${item.id}`} key={item.id} ref={selectPost}> */}
-                {/* <p onClick={testclass}>테스트 : {item.like}</p> */}
                 <div className="inner">
                   <div className="first_box">
                     <p
@@ -181,10 +173,7 @@ const PostAll = ({
                     >
                       ❌
                     </p>
-                    <h4>{parent2[idx].email}</h4>
-                    {/* <h4>
-                      {parent2[idx].email == "" ? "이메일" : parent2[idx].email}
-                    </h4> */}
+                    <h4>{item.email}</h4>
                     <img className="all_user_img" src={item.pic} />
                   </div>
                   <p
@@ -192,22 +181,23 @@ const PostAll = ({
                     onClick={(e) => {
                       console.log(idx);
                       if (item.heart) {
-                        // !item.heart);
                         e.target.innerText = "Like 🤍";
-                        let copyarr = [...parent];
+                        let copyarr = [...allData];
                         copyarr[idx].heart = false;
                         copyarr[idx].like = "Like 🤍";
                         // console.log(copyarr);
                         // console.log("하트", parent[idx].heart);
+                        // setAllData(copyarr);
                         setParent(copyarr);
                       } else {
                         // true);
                         e.target.innerText = "Like ❤";
-                        let copyarr = [...parent];
+                        let copyarr = [...allData];
                         copyarr[idx].heart = true;
                         copyarr[idx].like = "Like ❤";
                         // console.log(copyarr);
-                        console.log("하트", parent[idx].heart);
+                        // console.log("하트", item.heart);
+                        // setAllData(copyarr);
                         setParent(copyarr);
                       }
                     }}
@@ -228,7 +218,7 @@ const PostAll = ({
           </button>
         </div>
         <button className="tothetop" onClick={moveToPage}>
-          ↑
+        🔼
         </button>
       </div>
     </main>

@@ -4,8 +4,13 @@ import myImg from "../koala.jpg";
 import { Context1 } from "../App";
 
 const AddPost = () => {
-  const { create, setCreate, create2, setCreate2, userId } =
-    useContext(Context1);
+  const {
+    create,
+    setCreate,
+    create2,
+    setCreate2,
+    userId,
+  } = useContext(Context1);
 
   const navigate = useNavigate();
   const [addPost, setAddPost] = useState([]);
@@ -47,7 +52,6 @@ const AddPost = () => {
         id: -Math.floor(Math.random() * 100),
         heart: false,
         like: "Like 🤍",
-        // pic: "https://placeimg.com/100/100/people/100",
         pic: myImg,
         title: titleAdding.current.value,
         random:

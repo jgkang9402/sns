@@ -4,18 +4,13 @@ import PostDetail from "../pages/PostDetail";
 
 const PrivateRoute = ({
   login,
-  parent,
-  parent2,
-  setLogin,
-  setParent,
-  setParent2,
+  allData,
+  setAllData,
 }) => {
   return login == true ? (
     <PostDetail
-      parent={parent}
-      parent2={parent2}
-      setParent={setParent}
-      setParent2={setParent2}
+      allData={allData}
+      setAllData={setAllData}
     />
   ) : (
     <Navigate to="/login" />

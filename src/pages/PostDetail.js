@@ -1,7 +1,10 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-const PostDetail = ({ parent, parent2, setParent, setParent2 }) => {
+const PostDetail = ({
+  allData,
+  setAllData,
+}) => {
   let { id } = useParams();
   const navigate = useNavigate();
   const goBack = () => {
@@ -11,22 +14,22 @@ const PostDetail = ({ parent, parent2, setParent, setParent2 }) => {
   const likeToggle = (e) => {
     // parent.id.like
     // console.log(e.target.innerText);
-    console.log(parent[id].heart);
-    if (parent[id].heart) {
+    console.log(allData[id].heart);
+    if (!allData[id].heart) {
       e.target.innerText = "Like 🤍";
-      let copyarr = [...parent];
+      let copyarr = [...allData];
       copyarr[id].heart = false;
       console.log(copyarr);
-      console.log("하트", parent[id].heart);
-      setParent(copyarr);
+      console.log("하트", allData[id].heart);
+      setAllData(copyarr);
       // setParent(copyarr);
     } else {
       e.target.innerText = "Like ❤";
-      let copyarr = [...parent];
+      let copyarr = [...allData];
       copyarr[id].heart = true;
       console.log(copyarr);
-      console.log("하트", parent[id].heart);
-      setParent(copyarr);
+      console.log("하트", allData[id].heart);
+      setAllData(copyarr);
       // console.log(parent[id].like);
     }
     // parent[id].heart==false?parent[id].like="Like 🤍":
@@ -38,21 +41,21 @@ const PostDetail = ({ parent, parent2, setParent, setParent2 }) => {
           🔙
         </span>
         <div className="detail_first_box">
-          <img className="user_img" src={parent[id].pic} />
-          <span>{parent2[id].email}</span>
+          <img className="user_img" src={allData[id].pic} />
+          <span>{allData[id].email}</span>
         </div>
-        <img className="post_img" src={parent[id].random} />
+        <img className="post_img" src={allData[id].random} />
         <div>
           <div>
-            <span>Writer : {parent2[id].email}</span>
+            <span>Writer : {allData[id].email}</span>
             <br />
-            <span>Title : {parent[id].title}</span>
+            <span>Title : {allData[id].title}</span>
             <br />
             <p className="like_btn" onClick={likeToggle}>
-              {parent[id].like}
+              {allData[id].like?allData[id].like:!allData[id].like}
             </p>
           </div>
-          <p>{parent2[id].write}</p>
+          <p>{allData[id].write}</p>
         </div>
       </div>
     </div>

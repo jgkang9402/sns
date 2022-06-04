@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const Login = ({ setLogin, userId, setUserId }) => {
@@ -72,7 +71,7 @@ const Login = ({ setLogin, userId, setUserId }) => {
               id="input-password"
               // autocomplete="off"
             />
-            <button type="button" onClick={showPw}>
+            <button type="button" className="show_btn" onClick={showPw}>
               🧐
             </button>
           </div>
@@ -88,8 +87,8 @@ const Login = ({ setLogin, userId, setUserId }) => {
             <label htmlFor="id_save">아이디 저장</label>
           </div> */}
       <p className="login_error">{inputErrorMsg}</p>
-      <p>
-        No account? <a href="#wrapper-signup">Sign up</a>
+      <p className="account">
+        No account? <a href="#">Sign up</a>
       </p>
     </div>
   );
