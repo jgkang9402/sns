@@ -37,13 +37,26 @@ const PostAll = ({
             write: item.body,
           };
         });
-        // console.log(moreInfoList);
+        console.log(moreInfoList);
+
+        let newArr
         if (create.length > 0) {
-          let newArr = create2.concat(moreInfoList);
+          newArr = create2.concat(moreInfoList);
           setParent2(newArr);
-          return;
+          setAllData(newArr);
+          return newArr;
         }
+        console.log(moreInfoList);
         setParent2(moreInfoList);
+        console.log("첫번째",newArr);
+
+        // if (create.length > 0) {
+        //   let newArr = create2.concat(moreInfoList);
+        //   setParent2(newArr);
+        //   setAllData(newArr);
+        //   return;
+        // }
+        // setParent2(moreInfoList);
       })
       .catch((error) => {
         // console.log(error);
@@ -66,12 +79,25 @@ const PostAll = ({
             deleteAvailable: false,
           };
         });
+        
+        let newArr
         if (create.length > 0) {
-          let newArr = create.concat(sliceList);
+          newArr = create.concat(sliceList);
           setParent(newArr);
-          return;
+          setAllData(newArr);
+          console.log('두번째크리에이트',newArr);
+          return newArr;
         }
+        console.log('두번째',newArr);
         setParent(sliceList);
+
+        // if (create.length > 0) {
+        //   let newArr = create.concat(sliceList);
+        //   setParent(newArr);
+        //   setAllData(newArr);
+        //   return;
+        // }
+        // setParent(sliceList);
       })
       .catch((error) => {
         console.log(error);
@@ -143,7 +169,7 @@ const PostAll = ({
   useEffect(() => {
     console.log("getdata또실행?");
     getData();
-  }, [moreNum]);
+  },[moreNum]);
 
   const moveToPage = () => {
     window.scrollTo({
@@ -185,9 +211,6 @@ const PostAll = ({
                         let copyarr = [...allData];
                         copyarr[idx].heart = false;
                         copyarr[idx].like = "Like 🤍";
-                        // console.log(copyarr);
-                        // console.log("하트", parent[idx].heart);
-                        // setAllData(copyarr);
                         setParent(copyarr);
                       } else {
                         // true);
@@ -195,9 +218,6 @@ const PostAll = ({
                         let copyarr = [...allData];
                         copyarr[idx].heart = true;
                         copyarr[idx].like = "Like ❤";
-                        // console.log(copyarr);
-                        // console.log("하트", item.heart);
-                        // setAllData(copyarr);
                         setParent(copyarr);
                       }
                     }}

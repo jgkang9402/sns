@@ -1,41 +1,37 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-const PostDetail = ({
-  allData,
-  setAllData,
-}) => {
+const PostDetail = ({ allData, setAllData, setRememberData }) => {
   let { id } = useParams();
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
+    setRememberData(allData);
   };
 
   const likeToggle = (e) => {
-    // parent.id.like
-    // console.log(e.target.innerText);
+    e.target.innerText = "Like ❤";
+
     console.log(allData[id].heart);
     if (!allData[id].heart) {
+      let copyarr = [...allData];
+      copyarr[id].heart = true;
+      setAllData(copyarr);
+      // console.log(copyarr);
+      // console.log("하트", allData[id].heart);
+      // setParent(copyarr);
+    } else {
       e.target.innerText = "Like 🤍";
       let copyarr = [...allData];
       copyarr[id].heart = false;
-      console.log(copyarr);
-      console.log("하트", allData[id].heart);
       setAllData(copyarr);
-      // setParent(copyarr);
-    } else {
-      e.target.innerText = "Like ❤";
-      let copyarr = [...allData];
-      copyarr[id].heart = true;
-      console.log(copyarr);
-      console.log("하트", allData[id].heart);
-      setAllData(copyarr);
+      // console.log(copyarr);
+      // console.log("하트", allData[id].heart);
       // console.log(parent[id].like);
     }
-    // parent[id].heart==false?parent[id].like="Like 🤍":
   };
   return (
-    <div>
+    <div className="detail_top">
       <div className="detail_wrap_box">
         <span className="go-back" onClick={goBack}>
           🔙
@@ -52,7 +48,7 @@ const PostDetail = ({
             <span>Title : {allData[id].title}</span>
             <br />
             <p className="like_btn" onClick={likeToggle}>
-              {allData[id].like?allData[id].like:!allData[id].like}
+              {allData[id].like ? allData[id].like : !allData[id].like}
             </p>
           </div>
           <p>{allData[id].write}</p>

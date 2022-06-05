@@ -27,10 +27,12 @@ a {
   align-items: center;
   justify-content: space-between;
   background: linear-gradient(180deg, #fbf4f4, aqua);
+  flex-wrap: wrap;
   border-bottom: 1px solid #fbf4f4;
 }
 .logo_box {
   display: flex;
+  /* flex-wrap: wrap; */
   align-items: center;
   margin-left: 5vw;
 }
@@ -44,11 +46,13 @@ a {
   margin-left: 0;
   color: ghostwhite;
   font-family: "orbitron";
+  -webkit-text-stroke: .01rem #333;
 }
 
 .navbar nav {
   margin-right: 10vw;
   display: flex;
+  align-items: center;
 }
 .navbar nav button {
   font-size: 0.8em;
@@ -112,6 +116,7 @@ a {
   box-sizing: border-box;
   padding: 30px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
@@ -139,7 +144,7 @@ a {
   height: 5vh;
   border: 1px solid #1ecad3;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 1.2rem;
   padding-left: 5px;
   color: #666;
 }
@@ -245,8 +250,6 @@ main {
   color: red;
 }
 
-
-
 .box_more {
   position: relative;
   text-align: center;
@@ -268,6 +271,9 @@ main {
   color: #1ecad3;
 }
 /* 디테일 */
+.detail_top{
+  background: linear-gradient(180deg, aqua, #fbf4f4);
+}
 .detail_wrap_box {
   position: relative;
   border: 1px solid #333;
@@ -276,6 +282,7 @@ main {
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   margin: 0 auto;
   width: 80%;
+  background-color: #fbf4f4;
 }
 .go-back {
   cursor: pointer;
@@ -319,7 +326,7 @@ main {
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
-  width: 20%;
+  width: 40%;
   height: 20%;
   background-color: orange;
 }
@@ -457,8 +464,11 @@ main {
   .wrap_box {
     grid-template-columns: repeat(4, 1fr);
   }
-  .account{
-    font-size: 2rem;
+  .account {
+    font-size: 1.5rem;
+  }
+  .form-login span {
+    font-size: .9rem;
   }
 }
 
@@ -472,11 +482,22 @@ main {
   .wrap_box {
     grid-template-columns: repeat(2, 1fr);
   }
-  .inner .first_box {
-  }
   .all_user_img {
     width: 30%;
   }
+  .form-login span {
+    font-size: .7rem;
+  }
+  .form-login input {
+    font-size: .8rem;
+  }
+  .login_first_box .pw-box {
+    margin-top: -45px;
+}
+
+.login_first_box div, .login_first_box p {
+    height: 13vh;
+}
 }
 
 @media screen and (max-width: 550px) {
@@ -503,7 +524,7 @@ main {
     width: 75%;
   }
   .first_box h4 {
-    width: 20%;
+    margin: 10px auto;
   }
 
   .like_btn {
@@ -519,18 +540,34 @@ main {
     border-radius: 5px;
   }
   .navbar nav button {
-    font-size: .5rem;
+    font-size: 0.5rem;
+  }
+  .form-login  {
+    padding: 0; 
   }
   .form-login span {
-    font-size: .6rem;
+    font-size: 0.5rem;
+    width: 13vw;
   }
-  .show_btn{
+  .form-login input {
+    font-size: 0.5rem;
+  }
+  .show_btn {
     display: none;
   }
   .btn-login {
     width: 15vw;
     height: 13vh;
   }
-  
-
+}
+@media screen and (max-width: 450px) {
+  .navbar nav {
+    margin-right: 10vw;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  .login_first_box {
+    margin-right: 5px;
+}
 }

@@ -10,18 +10,19 @@ import PrivateRoute from "./route/PrivateRoute";
 export const Context1 = createContext();
 
 function App() {
-  const [login, setLogin] = useState(false);
-  const [userId, setUserId] = useState("");
-  // const [login, setLogin] = useState(true);
-  // const [userId, setUserId] = useState("abc123@naver.com");
+  // const [login, setLogin] = useState(false);
+  // const [userId, setUserId] = useState("");
+  const [login, setLogin] = useState(true);
+  const [userId, setUserId] = useState("abc123@naver.com");
   const [parent, setParent] = useState([]);
   const [parent2, setParent2] = useState([]);
-  const [moreNum, setMoreNum] = useState(10);
+  const [moreNum, setMoreNum] = useState(50);
   const [scrollMove, setScrollMove] = useState(0);
   const [create, setCreate] = useState([]);
   const [create2, setCreate2] = useState([]);
   const morescr = useRef(0);
   const [allData, setAllData] = useState([]);
+  const [rememberData, setRememberData] = useState([]);
 
   let copyAll1 = parent;
   let copyAll2 = parent2;
@@ -29,7 +30,7 @@ function App() {
   for (let i = 0; i < copyAll1.length; i++) {
     allCopyArr[i] = Object.assign(copyAll2[i], copyAll1[i]);
   }
-  
+
   const scrollReturn = () => {
     window.scrollTo({
       top: scrollMove,
@@ -39,6 +40,13 @@ function App() {
 
   useEffect(() => {
     setAllData(allCopyArr);
+    if (rememberData.length > 0) {
+      if (rememberData.length != parent.length) {
+        setAllData(allCopyArr);
+        return;
+      }
+      setAllData(rememberData);
+    }
     if (parent.length == parent2.length) {
       return;
     }
@@ -46,14 +54,14 @@ function App() {
       morescr.current = allData.length;
       scrollReturn();
     } else if (allData.length > morescr.current) {
-      // console.log("제발");
       morescr.current = allData.length;
     } else {
-      // console.log("여기냐");
       scrollReturn();
     }
   }, [parent]);
+
   console.log(allData);
+  console.log(rememberData);
 
   return (
     <div className="App">
@@ -88,6 +96,7 @@ function App() {
               login={login}
               allData={allData}
               setAllData={setAllData}
+              setRememberData={setRememberData}
             />
           }
         />
