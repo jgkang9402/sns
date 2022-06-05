@@ -12,7 +12,7 @@ const PostDetail = ({ allData, setAllData, setRememberData }) => {
   const likeToggle = (e) => {
     e.target.innerText = "Like ❤";
 
-    console.log(allData[id].heart);
+    // console.log(allData[id].heart);
     if (!allData[id].heart) {
       let copyarr = [...allData];
       copyarr[id].heart = true;

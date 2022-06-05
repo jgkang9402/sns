@@ -60,8 +60,8 @@ function App() {
     }
   }, [parent]);
 
-  console.log(allData);
-  console.log(rememberData);
+  // console.log(allData);
+  // console.log(rememberData);
 
   return (
     <div className="App">

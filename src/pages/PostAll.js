@@ -37,7 +37,7 @@ const PostAll = ({
             write: item.body,
           };
         });
-        console.log(moreInfoList);
+        // console.log(moreInfoList);
 
         let newArr
         if (create.length > 0) {
@@ -46,9 +46,9 @@ const PostAll = ({
           setAllData(newArr);
           return newArr;
         }
-        console.log(moreInfoList);
+        // console.log(moreInfoList);
         setParent2(moreInfoList);
-        console.log("첫번째",newArr);
+        // console.log("첫번째",newArr);
 
         // if (create.length > 0) {
         //   let newArr = create2.concat(moreInfoList);
@@ -85,10 +85,10 @@ const PostAll = ({
           newArr = create.concat(sliceList);
           setParent(newArr);
           setAllData(newArr);
-          console.log('두번째크리에이트',newArr);
+          // console.log('두번째크리에이트',newArr);
           return newArr;
         }
-        console.log('두번째',newArr);
+        // console.log('두번째',newArr);
         setParent(sliceList);
 
         // if (create.length > 0) {
@@ -117,7 +117,7 @@ const PostAll = ({
     setScrollMove(Math.floor(window.scrollY));
     if (login == false) {
       e.preventDefault();
-      console.log(123);
+      // console.log(123);
       closeModal();
     }
   };
@@ -167,7 +167,7 @@ const PostAll = ({
   // },[moreNum]);
 
   useEffect(() => {
-    console.log("getdata또실행?");
+    // console.log("getdata또실행?");
     getData();
   },[moreNum]);
 
