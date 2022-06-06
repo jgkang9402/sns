@@ -117,7 +117,7 @@ const AddPost = () => {
             id="file"
             type="file"
           />
-          <input type="text" className="imgload" value={picName} />
+          <input type="text" className="imgload" value={picName} placeholder="카메라 버튼을 눌러 이미지를 업데이트 해주세요" />
           <label htmlFor="file"></label>
         </div>
         <div>

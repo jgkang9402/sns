@@ -187,43 +187,45 @@ const PostAll = ({
             return (
               <li className="odd" key={item.id} ref={selectPost}>
                 <div className="inner">
-                  <div className="first_box">
+                  <div className="main_wrap_box">
+                    <div className="first_box">
+                      <p
+                        className={idx}
+                        style={{
+                          display: "inline-block",
+                          marginBottom: "20px",
+                          cursor: "pointer",
+                        }}
+                        onClick={removePost}
+                      >
+                        ❌
+                      </p>
+                      <h4>{item.email}</h4>
+                      <img className="all_user_img" src={item.pic} />
+                    </div>
                     <p
-                      className={idx}
-                      style={{
-                        display: "inline-block",
-                        marginBottom: "20px",
-                        cursor: "pointer",
+                      className="like_btn"
+                      onClick={(e) => {
+                        console.log(idx);
+                        if (item.heart) {
+                          e.target.innerText = "Like 🤍";
+                          let copyarr = [...allData];
+                          copyarr[idx].heart = false;
+                          copyarr[idx].like = "Like 🤍";
+                          setParent(copyarr);
+                        } else {
+                          // true);
+                          e.target.innerText = "Like ❤";
+                          let copyarr = [...allData];
+                          copyarr[idx].heart = true;
+                          copyarr[idx].like = "Like ❤";
+                          setParent(copyarr);
+                        }
                       }}
-                      onClick={removePost}
                     >
-                      ❌
+                      {item.like}
                     </p>
-                    <h4>{item.email}</h4>
-                    <img className="all_user_img" src={item.pic} />
                   </div>
-                  <p
-                    className="like_btn"
-                    onClick={(e) => {
-                      console.log(idx);
-                      if (item.heart) {
-                        e.target.innerText = "Like 🤍";
-                        let copyarr = [...allData];
-                        copyarr[idx].heart = false;
-                        copyarr[idx].like = "Like 🤍";
-                        setParent(copyarr);
-                      } else {
-                        // true);
-                        e.target.innerText = "Like ❤";
-                        let copyarr = [...allData];
-                        copyarr[idx].heart = true;
-                        copyarr[idx].like = "Like ❤";
-                        setParent(copyarr);
-                      }
-                    }}
-                  >
-                    {item.like}
-                  </p>
                   <Link to={`/post/${idx}`} onClick={rememberScroll}>
                     <img className="post_img" src={item.random} />
                   </Link>

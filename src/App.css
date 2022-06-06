@@ -46,7 +46,7 @@ a {
   margin-left: 0;
   color: ghostwhite;
   font-family: "orbitron";
-  -webkit-text-stroke: .01rem #333;
+  -webkit-text-stroke: 0.01rem #333;
 }
 
 .navbar nav {
@@ -271,7 +271,7 @@ main {
   color: #1ecad3;
 }
 /* 디테일 */
-.detail_top{
+.detail_top {
   background: linear-gradient(180deg, aqua, #fbf4f4);
 }
 .detail_wrap_box {
@@ -420,10 +420,12 @@ main {
   border: 0;
 }
 .imgload {
-  font-size: 1rem;
+  font-size: 0.9rem;
   padding: 0 10px;
   width: 320px;
   height: 50px;
+  border: 1px solid turquoise;
+  border-radius: 5px;
 }
 
 .submit_btn {
@@ -468,7 +470,7 @@ main {
     font-size: 1.5rem;
   }
   .form-login span {
-    font-size: .9rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -486,18 +488,19 @@ main {
     width: 30%;
   }
   .form-login span {
-    font-size: .7rem;
+    font-size: 0.7rem;
   }
   .form-login input {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
   .login_first_box .pw-box {
     margin-top: -45px;
-}
+  }
 
-.login_first_box div, .login_first_box p {
+  .login_first_box div,
+  .login_first_box p {
     height: 13vh;
-}
+  }
 }
 
 @media screen and (max-width: 550px) {
@@ -506,6 +509,11 @@ main {
   }
   .wrap_box {
     grid-template-columns: repeat(1, 1fr);
+  }
+  .main_wrap_box {
+    position: relative;
+    text-align: center;
+    width: 50%;
   }
   .inner {
     height: auto;
@@ -524,13 +532,17 @@ main {
     width: 75%;
   }
   .first_box h4 {
-    margin: 10px auto;
+    /* margin: 10px auto; */
+    padding: 10px 0;
+    position: relative;
+    /* right: 50%; */
+    width: 100%;
   }
 
   .like_btn {
     position: absolute;
-    top: -1px;
-    right: 5vw;
+    bottom: 0;
+    right: -35%;
   }
   .post_img {
     height: 100%;
@@ -542,8 +554,8 @@ main {
   .navbar nav button {
     font-size: 0.5rem;
   }
-  .form-login  {
-    padding: 0; 
+  .form-login {
+    padding: 0;
   }
   .form-login span {
     font-size: 0.5rem;
@@ -559,6 +571,25 @@ main {
     width: 15vw;
     height: 13vh;
   }
+  .add_title,
+  .imgload,
+  .add_write,
+  .error_txt {
+    width: 90%;
+  }
+
+  .add_write {
+    height: 230px;
+  }
+  .error_txt {
+    height: 30px;
+    font-size: 1.2rem;
+    line-height: normal;
+  }
+  .filebox label {
+    width: 50px;
+    height: 50px;
+  }
 }
 @media screen and (max-width: 450px) {
   .navbar nav {
@@ -569,5 +600,5 @@ main {
   }
   .login_first_box {
     margin-right: 5px;
-}
+  }
 }
