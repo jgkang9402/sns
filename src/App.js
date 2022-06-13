@@ -10,10 +10,10 @@ import PrivateRoute from "./route/PrivateRoute";
 export const Context1 = createContext();
 
 function App() {
-  // const [login, setLogin] = useState(false);
-  // const [userId, setUserId] = useState("");
-  const [login, setLogin] = useState(true);
-  const [userId, setUserId] = useState("abc123@naver.com");
+  const [login, setLogin] = useState(false);
+  const [userId, setUserId] = useState("");
+  // const [login, setLogin] = useState(true);
+  // const [userId, setUserId] = useState("abc123@naver.com");
   const [parent, setParent] = useState([]);
   const [parent2, setParent2] = useState([]);
   const [moreNum, setMoreNum] = useState(50);

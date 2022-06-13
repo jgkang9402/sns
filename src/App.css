@@ -244,6 +244,7 @@ main {
 .like_btn {
   cursor: pointer;
   display: inline;
+  color: #000;
 }
 
 .red {
@@ -301,7 +302,6 @@ main {
 .detail_first_box img {
   border-radius: 50%;
 }
-
 /* 모달 */
 .modal_box {
   background-color: rgba(0, 0, 0, 0.765);
@@ -542,7 +542,8 @@ main {
   .like_btn {
     position: absolute;
     bottom: 0;
-    right: -35%;
+    right: 5%;
+    top: 35%;
   }
   .post_img {
     height: 100%;

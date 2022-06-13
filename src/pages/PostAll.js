@@ -203,10 +203,16 @@ const PostAll = ({
                       <h4>{item.email}</h4>
                       <img className="all_user_img" src={item.pic} />
                     </div>
+                  </div>
+                  <Link to={`/post/${idx}`} onClick={rememberScroll}>
                     <p
                       className="like_btn"
                       onClick={(e) => {
                         console.log(idx);
+                        if(login===false){
+                          e.preventDefault();
+                          return
+                        }
                         if (item.heart) {
                           e.target.innerText = "Like 🤍";
                           let copyarr = [...allData];
@@ -225,8 +231,6 @@ const PostAll = ({
                     >
                       {item.like}
                     </p>
-                  </div>
-                  <Link to={`/post/${idx}`} onClick={rememberScroll}>
                     <img className="post_img" src={item.random} />
                   </Link>
                 </div>

@@ -47,7 +47,7 @@ const PostDetail = ({ allData, setAllData, setRememberData }) => {
             <br />
             <span>Title : {allData[id].title}</span>
             <br />
-            <p className="like_btn" onClick={likeToggle}>
+            <p className="detail_like_btn" onClick={likeToggle}>
               {allData[id].like ? allData[id].like : !allData[id].like}
             </p>
           </div>
